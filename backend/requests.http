@@ -1,0 +1,43 @@
+// SignUp Owner
+POST http://localhost:5000/api/auth/SignUp HTTP/1.1
+content-type: application/json
+
+{
+      "name": "Rohit Sikrewal",
+      "contact_no": "",
+      "gender": "",
+      "email": "sikrewalrohit@gmail.com",
+      "address": "",
+      "password": "xyz",
+      "persona": 0
+}
+
+###
+// SignUp employee
+POST http://localhost:5000/api/auth/SignUp HTTP/1.1
+content-type: application/json
+
+{
+      "name": "Rohit Sikrewal",
+      "contact_no": "4085496361",
+      "gender": "Male",
+      "email": "sikrewalro@gmail.com",
+      "address": "190 Ryland Street",
+      "password": "xyz",
+      "persona": 1
+}
+
+###
+// SignUp Customer
+POST http://localhost:5000/api/auth/SignUp HTTP/1.1
+content-type: application/json
+
+{
+      "name": "Rohit Sikrewal",
+      "contact_no": "4085496361",
+      "gender": "Male",
+      "email": "sikrewalrohit@gmail.com",
+      "address": "190 Ryland Street",
+      "password": "xyz",
+      "persona": 2
+}
