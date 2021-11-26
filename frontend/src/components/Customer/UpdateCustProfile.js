@@ -1,4 +1,8 @@
 import React from "react";
+import axios from "axios";
+import { useHistory } from "react-router";
+import SERVER_URL from "../../config/config.js";
+import { useEffect } from "react";
 import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -13,19 +17,21 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 
+let id = 1; // local storage
+
 const UpdateCustProfile = () => {
-  const [firstName, setfirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
+  // const [lastName, setLastName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [address, setAddress] = useState("");
 
-  const handleFirstNameChange = (e) => {
-    setfirstName(e.target.value);
+  const handleNameChange = (e) => {
+    setName(e.target.value);
   };
 
-  const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
-  };
+  // const handleLastNameChange = (e) => {
+  //   setLastName(e.target.value);
+  // };
 
   const handleContactNumberChange = (e) => {
     setContactNumber(e.target.value);
@@ -35,16 +41,69 @@ const UpdateCustProfile = () => {
     setAddress(e.target.value);
   };
 
-  console.log(firstName);
+  useEffect(() => {
+    axios
+      .get(SERVER_URL + `/api/customer/getCusInfo?id=${id}`)
+      .then((response) => {
+        // console.log(
+        //   "===========update response==========",
+        //   response.data[0].emp_name
+        // );
+        if (response.status === 200) {
+          setName(response.data[0].cus_name);
+          setContactNumber(response.data[0].contact_no);
+          setAddress(response.data[0].address);
+          // history.push("/Employee");
+        }
+      })
+      .catch((error) => {
+        // console.log("=============error=============", error);
+        if (error.response.data.msg) {
+          alert(error.response.data.msg);
+        } else {
+          alert("Unable to update employee information in database.");
+        }
+      });
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    // const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
+
+    let updateData = {
+      id: id,
+      name: name,
+      contactNumber: contactNumber,
+      address: address,
+    };
+
+    // console.log(updateData);
+
+    axios
+      .put(SERVER_URL + `/api/customer/updateCusInfo`, updateData)
+      .then((response) => {
+        // console.log("===========response==========", response.data[0].emp_name);
+        if (response.status === 200) {
+          setName(response.data[0].cus_name);
+          setContactNumber(response.data[0].contact_no);
+          setAddress(response.data[0].address);
+          alert("Customer Profile Updated");
+          // history.push("/Employee");
+        }
+      })
+      .catch((error) => {
+        // console.log("=============error=============", error);
+        if (error.response.data.msg) {
+          alert(error.response.data.msg);
+        } else {
+          alert("Unable to fetch Customer information from database.");
+        }
+      });
   };
 
   return (
@@ -63,7 +122,7 @@ const UpdateCustProfile = () => {
             <UpdateIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Update User Profile
+            Update Customer Profile
           </Typography>
           <Box
             component="form"
@@ -72,29 +131,17 @@ const UpdateCustProfile = () => {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="Name"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="Name"
+                  label="Name"
                   autoFocus
-                  value={firstName}
-                  onChange={handleFirstNameChange}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                  value={lastName}
-                  onChange={handleLastNameChange}
+                  value={name}
+                  onChange={handleNameChange}
                 />
               </Grid>
               <Grid item xs={12}>

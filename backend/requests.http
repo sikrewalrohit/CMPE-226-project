@@ -43,7 +43,6 @@ content-type: application/json
 }
 
 ###
-
 // SignIp Owner
 POST http://localhost:5000/api/auth/SignIn HTTP/1.1
 content-type: application/json
@@ -63,6 +62,7 @@ content-type: application/json
       "password": "z",
       "persona": 1
 }
+
 ###
 // SignIp customer
 POST http://localhost:5000/api/auth/SignIn HTTP/1.1
@@ -73,3 +73,64 @@ content-type: application/json
       "password": "yz",
       "persona": 2
 }
+
+###
+// get employee info
+Get http://localhost:5000/api/employee/getEmpInfo?id=2 HTTP/1.1
+content-type: application/json
+
+
+###
+// update employee info
+put http://localhost:5000/api/employee/updateEmpInfo HTTP/1.1
+content-type: application/json
+
+{
+      "id": 1,
+      "name": "Rohit",
+      "contactNumber": 9876789876,
+      "address": "190 ryland street"
+}
+
+###
+// get customer info
+Get http://localhost:5000/api/customer/getCusInfo?id=1 HTTP/1.1
+content-type: application/json
+
+
+###
+// update customer info
+put http://localhost:5000/api/customer/updateCusInfo HTTP/1.1
+content-type: application/json
+
+{
+      "id": 1,
+      "name": "Rohit",
+      "contactNumber": 9876789876,
+      "address": "190 ryland street"
+}
+
+###
+// delete customer info
+DELETE http://localhost:5000/api/customer/deleteCusInfo?id=4 HTTP/1.1
+content-type: application/json
+
+###
+// get customer id given customer email
+Get http://localhost:5000/api/customer/getCustIdGivenEmail?email=shivsmile@qaz.com HTTP/1.1
+content-type: application/json
+
+###
+// get all products
+Get http://localhost:5000/api/product/getAllProducts HTTP/1.1
+content-type: application/json
+
+###
+// get all employees
+Get http://localhost:5000/api/employee/getAllEmployees HTTP/1.1
+content-type: application/json
+
+###
+// delete employee given emp id 
+DELETE http://localhost:5000/api/employee/fireEmployee?id=7 HTTP/1.1
+content-type: application/json

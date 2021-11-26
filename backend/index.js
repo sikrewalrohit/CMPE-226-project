@@ -12,8 +12,14 @@ app.use(bodyParser.json());
 
 //Import Routes
 import AuthRoutes from "./Routes/AuthRoutes.js";
+import employeeRoute from "./Routes/EmployeeRoutes.js";
+import customerRoute from "./Routes/CustomerRoutes.js";
+import productRoute from "./Routes/ProductRoute.js";
 
 app.use("/api/auth", AuthRoutes);
+app.use("/api/employee", employeeRoute);
+app.use("/api/customer", customerRoute);
+app.use("/api/product", productRoute);
 
 //Routes
 app.get("/", (req, res) => {

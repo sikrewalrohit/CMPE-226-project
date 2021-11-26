@@ -1,14 +1,19 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
+import axios from "axios";
+import { useHistory } from "react-router";
+import { useEffect } from "react";
+import SERVER_URL from "../../config/config.js";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function CustNavBar() {
+  var id = 6; //fetch from local
   const history = useHistory();
 
   const updateProfile = () => {
@@ -22,7 +27,21 @@ export default function CustNavBar() {
 
   const deleteAccount = () => {
     // api to delete account i.e deleting creds from db table
-    history.push("/SignUp"); //on successful deletion
+    axios
+      .delete(SERVER_URL + `/api/customer/deleteCusInfo?id=${id}`)
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Your account has been deleted successfully!!");
+          history.push("/SignUp"); //on successful deletion
+        }
+      })
+      .catch((error) => {
+        if (error.response.data.msg) {
+          alert(error.response.data.msg);
+        } else {
+          alert("Unable to delete customer information from database.");
+        }
+      });
   };
 
   return (

@@ -1,6 +1,7 @@
-import './App.css';
-import Routes from './Routes/Routes.js';
-import { BrowserRouter } from 'react-router-dom';
+import "./App.css";
+import Routes from "./Routes/Routes.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
