@@ -6,9 +6,9 @@ content-type: application/json
       "name": "Rohit Sikrewal",
       "contact_no": "",
       "gender": "",
-      "email": "sikrewalrohit@gmail.com",
+      "email": "sikrw@gmail.com",
       "address": "",
-      "password": "xyz",
+      "password": "s",
       "persona": 0
 }
 
@@ -21,7 +21,7 @@ content-type: application/json
       "name": "Rohit Sikrewal",
       "contact_no": "4085496361",
       "gender": "Male",
-      "email": "sikrewalro@gmail.com",
+      "email": "sikrewalrhgvghgho123@gmail.com",
       "address": "190 Ryland Street",
       "password": "xyz",
       "persona": 1
@@ -36,8 +36,40 @@ content-type: application/json
       "name": "Rohit Sikrewal",
       "contact_no": "4085496361",
       "gender": "Male",
-      "email": "sikrewalrohit@gmail.com",
+      "email": "sa@gmail.com",
       "address": "190 Ryland Street",
       "password": "xyz",
+      "persona": 2
+}
+
+###
+
+// SignIp Owner
+POST http://localhost:5000/api/auth/SignIn HTTP/1.1
+content-type: application/json
+
+{
+      "email": "sikr13@gmail.com",
+      "password": "ou",
+      "persona": 0
+}
+###
+// SignIp employee
+POST http://localhost:5000/api/auth/SignIn HTTP/1.1
+content-type: application/json
+
+{
+      "email": "sikrewavgsahgshgho123@gmail.com",
+      "password": "z",
+      "persona": 1
+}
+###
+// SignIp customer
+POST http://localhost:5000/api/auth/SignIn HTTP/1.1
+content-type: application/json
+
+{
+      "email": "sart@gmail.com",
+      "password": "yz",
       "persona": 2
 }

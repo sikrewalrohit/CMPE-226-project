@@ -1,5 +1,8 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import SERVER_URL from "../../config/config.js";
+import { useHistory } from "react-router";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -20,16 +23,60 @@ import GroupIcon from "@mui/icons-material/Group";
 const theme = createTheme();
 
 export default function SignIn() {
+  let history = useHistory();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [navigatioBarValue, setnavigatioBarValue] = useState(0);
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  // console.log(email, password, navigatioBarValue);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    // const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
+
+    const data = {
+      email: email,
+      password: password,
+      persona: navigatioBarValue,
+    };
+
+    axios
+      .post(SERVER_URL + "/api/auth/SignIn", data)
+      .then((response) => {
+        console.log("===========response==========", response);
+        if (response.status === 200) {
+          if (data.persona === 0) {
+            history.push("/Owner");
+          } else if (data.persona === 1) {
+            history.push("/Employee");
+          } else if (data.persona === 2) {
+            history.push("/Customer");
+          }
+        }
+      })
+      .catch((error) => {
+        // console.log("=============error=============", error);
+        if (error.response.data.msg) {
+          alert(error.response.data.msg);
+        } else {
+          alert("Error occured while signing in");
+        }
+      });
   };
 
   return (
@@ -65,6 +112,8 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={handleEmailChange}
             />
             <TextField
               margin="normal"
@@ -75,6 +124,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={handlePasswordChange}
             />
             <Grid item xs={12}>
               <BottomNavigation

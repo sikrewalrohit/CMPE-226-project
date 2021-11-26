@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "dotenv/config";
+import SERVER_URL from "../../config/config.js";
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -84,7 +84,7 @@ export default function SignUp() {
     // console.log("============data========", data);
 
     axios
-      .post("http://localhost:5000/api/auth/SignUp", data)
+      .post(SERVER_URL + "/api/auth/SignUp", data)
       .then((response) => {
         // console.log("===========response==========", response);
         if (response.status === 200) {
@@ -94,8 +94,12 @@ export default function SignUp() {
         }
       })
       .catch((error) => {
-        console.log(error);
-        alert("Error occured while signing up");
+        // console.log(error);
+        if (error.response.data.msg) {
+          alert(error.response.data.msg);
+        } else {
+          console.alert("Error occured while signing up");
+        }
       });
 
     setName("");

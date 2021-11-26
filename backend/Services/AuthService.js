@@ -1,3 +1,4 @@
+import { Console } from "console";
 import { connection as sql } from "../index.js";
 
 // promise for fetching userProfile profile info
@@ -43,16 +44,34 @@ export const getCredsPromise = (persona, email) => {
   });
 };
 
-// promise for fetching userProfile info
+// promise for fetching userProfile info based on id
 export const getPorfilePromise = (persona, id) => {
   return new Promise((resolve) => {
     var query = "";
     if (persona === 0) {
-      query = `select * from company_owner where owner_id = '${id}'; `;
+      query = `select * from company_owner where owner_id='${id}'; `;
     } else if (persona === 1) {
-      query = `select * from employee where employee_id = '${id}'; `;
+      query = `select * from employee where employee_id='${id}'; `;
     } else if (persona === 2) {
-      query = `select * from customer where customer_id = '${id}'; `;
+      query = `select * from customer where customer_id='${id}'; `;
+    }
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};
+
+// promise for fetching userProfile info based on email
+export const getPorfilePromiseSignIn = (persona, email) => {
+  return new Promise((resolve) => {
+    var query = "";
+    if (persona === 0) {
+      query = `select * from company_owner where email='${email}'; `;
+    } else if (persona === 1) {
+      query = `select * from employee where email='${email}'; `;
+    } else if (persona === 2) {
+      query = `select * from customer where email='${email}'; `;
     }
 
     sql.query(query, (err, result) => {

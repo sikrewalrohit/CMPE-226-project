@@ -1,15 +1,17 @@
 import bcrypt from "bcrypt";
+
 import {
   addToDbPromise,
   getCredsPromise,
   getPorfilePromise,
+  getPorfilePromiseSignIn,
 } from "../Services/AuthService.js";
 
 // SignUp function
 export const clientSignup = async (req, res) => {
-  //   console.log("==========Inside Thingy=================");
+  // console.log("==========Inside Thingy=================");
   const newUser = req.body;
-  //   console.log("==========newUser=================", newUser);
+  // console.log("==========newUser=================", newUser);
   try {
     const [err1, result1] = await getCredsPromise(
       newUser.persona,
@@ -73,28 +75,49 @@ export const SignIn = async (req, res) => {
     const userEmail = req.body.email;
     const userPass = req.body.password;
     const persona = req.body.persona;
-    const [err1, result1] = await getUserDetailsPromise(userEmail);
-    if (result1) {
-      var retPassword = "";
-      if (persona === 0) {
-        retPassword = result1.owner_pwd;
-      } else if (persona === 1) {
-        retPassword = result1.emp_password;
-      } else if (persona === 2) {
-        retPassword = result1.cus_password;
-      }
-    }
+
+    // console.log("=============email============", userEmail);
+    // console.log("=============password============", userPass);
+    // console.log("=============persona============", persona);
+    const [err1, result1] = await getPorfilePromiseSignIn(persona, userEmail);
+    // console.log("======err1=======", err1);
+    // console.log("=======result1======", result1);
+
     if (err1) {
       res.status(400).json({ msg: "Unable to fetch data from database" });
-    } else if (result1.length === 0) {
-      res.status(404).json(result1);
-    } else if (bcrypt.compareSync(userPass, result1[0].password)) {
-      delete result1[0].password;
-      res.status(200).json({ result: result1[0], accessToken: accessToken }); // this part
+      return;
+    }
+
+    if (result1.length === 0) {
+      res
+        .status(404)
+        .json({ msg: "Account does not exists..Please make a account." });
+      return;
     } else {
+      var retPassword = "";
+      if (persona === 0) {
+        // console.log("========here=0=======", persona);
+        retPassword = result1[0].owner_pwd;
+      } else if (persona === 1) {
+        // console.log("========here=1=======", persona);
+        retPassword = result1[0].emp_password;
+      } else if (persona === 2) {
+        // console.log("========here=2=======", persona);
+        retPassword = result1[0].cus_password;
+      }
+    }
+
+    // console.log("=========retPassword==========", userPass, retPassword);
+    // console.log("=========err1==========", err1);
+
+    if (bcrypt.compareSync(userPass, retPassword)) {
+      res.status(200).json({ result: result1[0] }); // this part
+    } else {
+      // console.log("==============here==========");
       res.status(401).json({ msg: "Invalid Password" });
     }
   } catch (error) {
-    res.status(400).json("Unable to login");
+    // console.log("==============error==========", error);
+    res.status(400).json({ msg: "Unable to login" });
   }
 };
