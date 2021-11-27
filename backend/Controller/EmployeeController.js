@@ -5,6 +5,9 @@ import {
   updateEmpInfoService,
   getAllEmployeesService,
   fireEmployeeService,
+  addTransactionService,
+  getAllEmployeesFromToService,
+  getEmployeesWithHighSaleLasMonService,
 } from "../Services/EmployeeService.js";
 
 // fetch employee info
@@ -115,6 +118,75 @@ export const getAllEmployees = async (req, res) => {
   }
 };
 
+// fetch all employees from to to
+export const getAllEmployeesFromTo = async (req, res) => {
+  //   console.log("==========Inside Thingy=================");
+  //   console.log(
+  //     "==========Inside Thingy=================",
+  //     req.body.id,
+  //     req.body.name,
+  //     req.body.email,
+  //     req.body.address
+  //   );
+
+  try {
+    const [err1, result1] = await getAllEmployeesFromToService(
+      req.query.from,
+      req.query.to
+    );
+    console.log("================err1==============", err1);
+    console.log("================result1 of update==============", result1);
+
+    if (err1) {
+      res.status(400).json({ msg: "Unable to fetch employees from database." });
+      return;
+    }
+
+    if (result1.length === 0) {
+      res.status(400).json({ msg: "No employees to fetch." });
+      return;
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    console.log("================error  1==============", error);
+    res.status(400).json({ msg: "Unable to fetch employees from database." });
+  }
+};
+
+// fetch all employees with highest sale
+export const getEmployeesWithHighSaleLasMon = async (req, res) => {
+  //   console.log("==========Inside Thingy=================");
+  //   console.log(
+  //     "==========Inside Thingy=================",
+  //     req.body.id,
+  //     req.body.name,
+  //     req.body.email,
+  //     req.body.address
+  //   );
+
+  try {
+    const [err1, result1] = await getEmployeesWithHighSaleLasMonService();
+    console.log("================err1==============", err1);
+    console.log("================result1 of update==============", result1);
+
+    if (err1) {
+      res.status(400).json({ msg: "Unable to fetch employees from database." });
+      return;
+    }
+
+    if (result1.length === 0) {
+      res.status(400).json({ msg: "No employees to fetch." });
+      return;
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    console.log("================error  1==============", error);
+    res.status(400).json({ msg: "Unable to fetch employees from database." });
+  }
+};
+
 // delete employee given employee id
 export const fireEmployee = async (req, res) => {
   //   console.log("==========Inside Thingy=================");
@@ -135,5 +207,54 @@ export const fireEmployee = async (req, res) => {
   } catch (error) {
     // console.log("================error  1==============", error);
     res.status(400).json({ msg: "Unable to fire employee." });
+  }
+};
+
+// employee makes a transaction for customer
+export const addTransaction = async (req, res) => {
+  console.log(
+    "=========All=================",
+    req.body.products,
+    req.body.cusId,
+    req.body.empId,
+    req.body.date,
+    req.body.qty,
+    req.body.payDue,
+    req.body.discount
+  );
+  console.log("==========Inside Thingy=================", req.body.products);
+
+  // converting product ids to comma sapareted string
+  var productIdsString = "";
+  req.body.products.forEach((product) => {
+    productIdsString = productIdsString + `${product.productId},`;
+  });
+
+  productIdsString = productIdsString.slice(0, -1);
+
+  console.log("==========Inside Thingy=================", productIdsString);
+
+  try {
+    const [err1, result1] = await addTransactionService(
+      productIdsString,
+      req.body.cusId,
+      req.body.empId,
+      req.body.date,
+      req.body.qty,
+      req.body.payDue,
+      req.body.discount
+    );
+    console.log("================err1==============", err1);
+    console.log("================result1 of update==============", result1);
+
+    if (err1) {
+      res.status(400).json({ msg: "Unable to create transaction." });
+      return;
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    console.log("================error catch==============", error);
+    res.status(400).json({ msg: "Unable to create transaction." });
   }
 };

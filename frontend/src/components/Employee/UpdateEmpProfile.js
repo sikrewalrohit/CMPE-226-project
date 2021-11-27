@@ -17,8 +17,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 
-let id = 1; // local storage
-
+let id = 9; // local storage
 const UpdateEmpProfile = () => {
   let history = useHistory();
   const [name, setName] = useState("");

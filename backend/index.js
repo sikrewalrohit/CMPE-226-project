@@ -15,11 +15,13 @@ import AuthRoutes from "./Routes/AuthRoutes.js";
 import employeeRoute from "./Routes/EmployeeRoutes.js";
 import customerRoute from "./Routes/CustomerRoutes.js";
 import productRoute from "./Routes/ProductRoute.js";
+import transactionRoute from "./Routes/TransactionRoutes.js";
 
 app.use("/api/auth", AuthRoutes);
 app.use("/api/employee", employeeRoute);
 app.use("/api/customer", customerRoute);
 app.use("/api/product", productRoute);
+app.use("/api/transaction", transactionRoute);
 
 //Routes
 app.get("/", (req, res) => {

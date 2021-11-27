@@ -5,6 +5,8 @@ import {
   updateCusInfoService,
   deleteCusInfoService,
   getCustIdGivenEmailService,
+  getFiveCusHighPurFromToService,
+  getFiveCusHighPurLasMonService,
 } from "../Services/CustomerService.js";
 
 // fetch customer info
@@ -119,6 +121,67 @@ export const getCustIdGivenEmail = async (req, res) => {
 
     if (result1.length === 0) {
       res.status(400).json({ msg: "Invalid Email For Customer." });
+      return;
+    }
+    if (err1) {
+      res
+        .status(400)
+        .json({ msg: "Unable to fetch customer information from database." });
+      return;
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    // console.log("================error==============", error);
+    res
+      .status(400)
+      .json({ msg: "Unable to fetch customer information from database." });
+  }
+};
+
+// fetch to cus with hisghest pur
+export const getFiveCusHighPurFromTo = async (req, res) => {
+  // console.log("==========Inside Thingy=================");
+
+  try {
+    const [err1, result1] = await getFiveCusHighPurFromToService(
+      req.query.from,
+      req.query.to
+    );
+    // console.log("================err1==============", err1);
+    // console.log("================result1==============", result1);
+
+    if (result1.length === 0) {
+      res.status(400).json({ msg: "No Customers to Fetch." });
+      return;
+    }
+    if (err1) {
+      res
+        .status(400)
+        .json({ msg: "Unable to fetch customer information from database." });
+      return;
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    // console.log("================error==============", error);
+    res
+      .status(400)
+      .json({ msg: "Unable to fetch customer information from database." });
+  }
+};
+
+// fetch to cus with hisghest pur last mon
+export const getFiveCusHighPurLasMon = async (req, res) => {
+  // console.log("==========Inside Thingy=================");
+
+  try {
+    const [err1, result1] = await getFiveCusHighPurLasMonService();
+    // console.log("================err1==============", err1);
+    console.log("================result1==============", result1);
+
+    if (result1.length === 0) {
+      res.status(400).json({ msg: "No Customers to Fetch." });
       return;
     }
     if (err1) {

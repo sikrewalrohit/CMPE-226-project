@@ -13,6 +13,11 @@ import EmpTransactions from "../components/Employee/EmpTransactions.js";
 import Owner from "../components/Owner/Owner.js";
 import AllEmployees from "../components/Owner/AllEmployees.js";
 import OwnerTransactions from "../components/Owner/OwnerTransactions.js";
+import AllTransactionsChanged from "../components/Owner/OwnerTransactionRedirect/AllTransactionsChanged.js";
+import pushToEmployeesWithHighSaleFromTo from "../components/Owner/OwnerTransactionRedirect/PushToEmployeesWithHighSaleFromTo.js";
+import PushToCustomersWithHighPurchaseFromTo from "../components/Owner/OwnerTransactionRedirect/PushToCustomersWithHighPurchaseFromTo.js";
+import pushCusWithHighestPurLastMonth from "../components/Owner/OwnerTransactionRedirect/pushCusWithHighestPurLastMonth.js";
+import PushToEmployeesWithHighSaleLasMon from "../components/Owner/OwnerTransactionRedirect/PushToEmployeesWithHighSaleLasMon.js";
 
 const Routes = () => {
   return (
@@ -29,6 +34,26 @@ const Routes = () => {
       <Route path="/Owner" component={Owner} />
       <Route path="/AllEmployees" component={AllEmployees} />
       <Route path="/OwnerTransactions" component={OwnerTransactions} />
+      <Route
+        path="/AllTransactionsChanged"
+        component={AllTransactionsChanged}
+      />
+      <Route
+        path="/pushToEmployeesWithHighSaleFromTo"
+        component={pushToEmployeesWithHighSaleFromTo}
+      />
+      <Route
+        path="/PushToCustomersWithHighPurchaseFromTo"
+        component={PushToCustomersWithHighPurchaseFromTo}
+      />
+      <Route
+        path="/pushCusWithHighestPurLastMonth"
+        component={pushCusWithHighestPurLastMonth}
+      />
+      <Route
+        path="/PushToEmployeesWithHighSaleLasMon"
+        component={PushToEmployeesWithHighSaleLasMon}
+      />
     </div>
   );
 };

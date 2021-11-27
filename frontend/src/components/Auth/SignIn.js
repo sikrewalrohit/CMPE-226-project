@@ -58,7 +58,7 @@ export default function SignIn() {
     axios
       .post(SERVER_URL + "/api/auth/SignIn", data)
       .then((response) => {
-        console.log("===========response==========", response);
+        console.log("===========response==========", response.data.result);
         if (response.status === 200) {
           if (data.persona === 0) {
             history.push("/Owner");
@@ -67,10 +67,14 @@ export default function SignIn() {
           } else if (data.persona === 2) {
             history.push("/Customer");
           }
+          localStorage.setItem(
+            "userData",
+            JSON.stringify(response.data.result)
+          );
         }
       })
       .catch((error) => {
-        // console.log("=============error=============", error);
+        console.log("=============error=============", error);
         if (error.response.data.msg) {
           alert(error.response.data.msg);
         } else {

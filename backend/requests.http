@@ -21,9 +21,9 @@ content-type: application/json
       "name": "Rohit Sikrewal",
       "contact_no": "4085496361",
       "gender": "Male",
-      "email": "sikrewalrhgvghgho123@gmail.com",
+      "email": "sikrewal1@gmail.com",
       "address": "190 Ryland Street",
-      "password": "xyz",
+      "password": "sikrewal1@gmail.com",
       "persona": 1
 }
 
@@ -131,6 +131,69 @@ Get http://localhost:5000/api/employee/getAllEmployees HTTP/1.1
 content-type: application/json
 
 ###
+// get all employees from to
+Get http://localhost:5000/api/employee/getAllEmployeesFromTo?from=2021-11-02&&to=2021-11-30 HTTP/1.1
+content-type: application/json
+
+###
+// gettop 5 emp with highest sale last mon
+Get http://localhost:5000/api/employee/getEmployeesWithHighSaleLasMon HTTP/1.1
+content-type: application/json
+
+
+
+###
 // delete employee given emp id 
 DELETE http://localhost:5000/api/employee/fireEmployee?id=7 HTTP/1.1
+content-type: application/json
+
+###
+// get all employees
+POST http://localhost:5000/api/employee/addTransaction HTTP/1.1
+content-type: application/json
+
+{
+    "cusId": 2,
+    "empId": 3,
+    "date": "2021-11-26",
+    "qty": 2,
+    "payDue": 0,
+    "discount": "10",
+    "products": [
+        {
+            "productId": 1,
+            "productName": "LogiTech HD Web Cam",
+            "productPrice": 100
+        },
+        {
+            "productId": 2,
+            "productName": "Fire HD 8 Tablet",
+            "productPrice": 119
+        }
+    ]
+}
+
+###
+// get all transactions of a customer given customer id
+Get http://localhost:5000/api/transaction/fetchAllTransactions?id=8 HTTP/1.1
+content-type: application/json
+
+###
+// given transaction id update payment due of transaction
+PUT http://localhost:5000/api/transaction/updateTransactionPayDueCol?id=3 HTTP/1.1
+content-type: application/json
+
+###
+// get all transactions from changes table
+get http://localhost:5000/api/transaction/fetchAllTransactionsChanged HTTP/1.1
+content-type: application/json
+
+###
+// get customer id given customer email
+Get http://localhost:5000/api/customer/getFiveCusHighPurFromTo?from=2021-11-02&&to=2021-11-30 HTTP/1.1
+content-type: application/json
+
+###
+// get customer id given customer email
+Get http://localhost:5000/api/customer/getFiveCusHighPurLasMon HTTP/1.1
 content-type: application/json

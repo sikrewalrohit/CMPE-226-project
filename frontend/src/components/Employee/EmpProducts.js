@@ -16,31 +16,59 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PersonIcon from "@mui/icons-material/Person";
 import { useState } from "react";
 import Table from "react-bootstrap/Table";
+import { useCart } from "react-use-cart";
 
 const theme = createTheme();
 
 function EmpProducts(props) {
+  let history = useHistory();
+
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  var empId = userData.employee_id;
+  // console.log("==============", empId);
+
+  var today = new Date(),
+    date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+
+  // console.log("##################", date);
+
+  const { setItems } = useCart();
   const [email, setEmail] = useState("");
+  const [discount, setDiscount] = useState(0);
   const [modalState, setModalState] = useState(1);
   const [products, setProducts] = useState([]);
+  const [cusId, setCusid] = useState("");
+  const [productsAddedToCart, setProductsAddedToCart] = useState([]);
+  const [allInfoExport, setAllInfoExport] = useState({});
+  // const [qty, setQty] = useState(0);
+
+  console.log(
+    "==============xxxxxxxxxxxxx===============",
+    productsAddedToCart
+  );
 
   useEffect(() => {
     // api call to fetch all products
     axios
       .get(SERVER_URL + `/api/product/getAllProducts`)
       .then((response) => {
-        console.log("=========== response==========", response.data);
+        // console.log("=========== response==========", response.data);
         if (response.status === 200) {
           setProducts(response.data); // might need to save in LS
         }
       })
       .catch((error) => {
         // console.log("=============error=============", error);
-        if (error.response.data.msg) {
-          alert(error.response.data.msg);
-        } else {
-          alert("Unable to fetch products from database.");
-        }
+        // if (error.response.data.msg) {
+        // alert(error.response.data.msg);
+        // } else {
+        alert("Unable to fetch products from database.");
+        // }
       });
   }, []);
 
@@ -48,9 +76,50 @@ function EmpProducts(props) {
     setEmail(e.target.value);
   };
 
+  const handleDiscountChange = (e) => {
+    setDiscount(e.target.value);
+  };
+
+  const handleSendData = (e) => {
+    const data = {
+      cusId,
+      empId,
+      date,
+      qty: productsAddedToCart.length,
+      payDue: 0,
+      discount,
+      products: productsAddedToCart,
+    };
+
+    setAllInfoExport(data);
+    axios
+      .post(SERVER_URL + "/api/employee/addTransaction", data)
+      .then((response) => {
+        // console.log("===========response==========", response);
+        if (response.status === 200) {
+          history.push("/Employee");
+        }
+      })
+      .catch((error) => {
+        // console.log(error);
+        // if (error.response.data.msg) {
+        // alert(error.response.data.msg);
+        // } else {
+        alert({ msg: "Unable to create transaction." });
+        // }
+      });
+  };
+
   // console.log(email);
 
   useEffect(() => {}, []);
+
+  const addToCart = (productId, productName, productPrice) => {
+    setProductsAddedToCart((productsAddedToCart) => [
+      ...productsAddedToCart,
+      { productId, productName, productPrice },
+    ]);
+  };
 
   const handleSubmit = async (event) => {
     // api call for to get cust id given cust email
@@ -62,7 +131,8 @@ function EmpProducts(props) {
           response.data[0].customer_id
         );
         if (response.status === 200) {
-          var cusId = response.data[0].customer_id; // might need to save in LS
+          setCusid(response.data[0].customer_id);
+          // var cusId = response.data[0].customer_id; // might need to save in LS
           setModalState(0);
         }
       })
@@ -141,6 +211,7 @@ function EmpProducts(props) {
                 <th>Product Id</th>
                 <th>Product Name</th>
                 <th>Product Price</th>
+                <th>Add TO Cart</th>
               </tr>
             </thead>
             <tbody>
@@ -149,10 +220,78 @@ function EmpProducts(props) {
                   <td>{product.product_id}</td>
                   <td>{product.product_name}</td>
                   <td>{product.product_price}</td>
+                  <td>
+                    <Button
+                      // value={employee.employee_id}
+                      type="submit"
+                      onClick={() =>
+                        addToCart(
+                          product.product_id,
+                          product.product_name,
+                          product.product_price
+                        )
+                      }
+                      // onClick={() => fireEmployee(employee.employee_id)}
+                      // onClick={() => fireEmployee("ROhit")}
+                      color="error"
+                      variant="contained"
+                      // disabled="false"
+                    >
+                      Add To Cart
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </Table>
+        ) : null}
+        {modalState !== 1 ? (
+          <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
+              <Box
+                sx={{
+                  marginTop: 8,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Typography component="h1" variant="h5">
+                  Enter Discount
+                </Typography>
+                <Box
+                  component="form"
+                  // onSubmit={handleSubmit}
+                  noValidate
+                  sx={{ mt: 1 }}
+                >
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="discount"
+                    label="Discount"
+                    name="discount"
+                    autoComplete="discount"
+                    autoFocus
+                    value={discount}
+                    onChange={handleDiscountChange}
+                  />
+
+                  <Button
+                    type="button"
+                    onClick={handleSendData}
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Submit
+                  </Button>
+                </Box>
+              </Box>
+            </Container>
+          </ThemeProvider>
         ) : null}
       </div>
     </div>

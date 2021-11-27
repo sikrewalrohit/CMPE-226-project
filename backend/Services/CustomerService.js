@@ -44,3 +44,32 @@ export const getCustIdGivenEmailService = (cus_email) => {
     });
   });
 };
+
+// promise for fetching top 5 cust with highest purchases
+export const getFiveCusHighPurFromToService = (from, to) => {
+  return new Promise((resolve) => {
+    var query = `SELECT c.cus_name, sum(t.total) as Total
+    from customer as c, tran as t
+    where c.customer_id=t.customer_id and t.tran_date between '${from}' and '${to}'
+    group by c.cus_name
+    order by sum(t.total) DESC
+    LIMIT 5;`;
+    // console.log("=====================", query);
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};
+
+// promise for fetching top 5 cust with highest purchases last month
+export const getFiveCusHighPurLasMonService = () => {
+  return new Promise((resolve) => {
+    var query = `call IMS.top_5('customer');`;
+    // console.log("=====================", query);
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};
