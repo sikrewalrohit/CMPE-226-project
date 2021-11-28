@@ -51,7 +51,7 @@ function EmpProducts(props) {
 
   // const [qty, setQty] = useState(0);
 
-  console.log("==============xxxxxxxxxxxxx===============", membershipStatus);
+  console.log("==============xxxxxxxxxxxxx===============", products);
 
   useEffect(() => {
     // api call to fetch all products
@@ -102,12 +102,9 @@ function EmpProducts(props) {
         }
       })
       .catch((error) => {
-        // console.log(error);
-        // if (error.response.data.msg) {
-        // alert(error.response.data.msg);
-        // } else {
-        alert({ msg: "Unable to create transaction." });
-        // }
+        console.log("============error==============", error);
+
+        alert("Unable to create transaction.");
       });
   };
 

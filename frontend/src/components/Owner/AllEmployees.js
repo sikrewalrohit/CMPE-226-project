@@ -61,7 +61,7 @@ function AllEmployees(props) {
             <th>Gender</th>
             <th>Email</th>
             <th>Address</th>
-            <th>Fire Employee</th>
+            {/* <th>Fire Employee</th> */}
           </tr>
         </thead>
         <tbody>
@@ -73,7 +73,7 @@ function AllEmployees(props) {
               <td>{employee.gender}</td>
               <td>{employee.email}</td>
               <td>{employee.address}</td>
-              <td>
+              {/* <td>
                 <Button
                   // value={employee.employee_id}
                   type="submit"
@@ -84,7 +84,7 @@ function AllEmployees(props) {
                 >
                   Fire Employee
                 </Button>
-              </td>
+              </td> */}
 
               <td></td>
             </tr>

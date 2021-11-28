@@ -63,12 +63,12 @@ export default function EmployeeNavBar() {
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Button onClick={products} color="warning" variant="contained">
-              Products
+              Create Order
             </Button>
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Button onClick={customers} color="secondary" variant="contained">
-              Show Customers
+              Show All Customers
             </Button>
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -82,7 +82,7 @@ export default function EmployeeNavBar() {
               Payment
             </Link> */}
             <Button onClick={transactions} color="success" variant="contained">
-              Transactions
+              Update Orders
             </Button>
           </Typography>
         </Toolbar>
