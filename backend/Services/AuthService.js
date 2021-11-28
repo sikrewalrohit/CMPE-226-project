@@ -9,7 +9,8 @@ export const addToDbPromise = (
   email,
   address,
   password,
-  persona
+  persona,
+  member
 ) => {
   return new Promise((resolve) => {
     var query = "";
@@ -18,8 +19,9 @@ export const addToDbPromise = (
     } else if (persona === 1) {
       query = `insert into employee (emp_name, contact_no, gender, email, address, emp_password) values('${name}','${contact_no}', '${gender}', '${email}', '${address}', '${password}');`;
     } else if (persona === 2) {
-      query = `insert into customer (cus_name, contact_no, gender, email, address, cus_password) values('${name}','${contact_no}', '${gender}', '${email}', '${address}', '${password}');`;
+      query = `insert into customer (cus_name, contact_no, gender, email, address, cus_password, membership) values('${name}','${contact_no}', '${gender}', '${email}', '${address}', '${password}', '${member}');`;
     }
+    console.log(query);
     sql.query(query, (err, result) => {
       resolve([err, result]);
     });

@@ -21,7 +21,7 @@ import { useCart } from "react-use-cart";
 import { maxHeight } from "@mui/system";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import CustNavBar from "../Customer/CustNavBar.js";
+import OwnerNavBar from "./OwnerNavBar";
 
 const theme = createTheme();
 
@@ -56,8 +56,52 @@ function OwnerTransactions(props) {
     history.push("/PushToEmployeesWithHighSaleLasMon");
   };
 
+  const pushToTransactionsByEmployee = () => {
+    // history.push("/pushToEmployeesWithHighSaleFromTo");
+    history.push({
+      pathname: "/PushToTransactionsByEmployee",
+      state: { empName }, // your data array of objects
+    });
+  };
+
+  const pushToTotalIncomeGenarated = () => {
+    // history.push("/pushToEmployeesWithHighSaleFromTo");
+    history.push("/PushToTotalIncomeGenarated");
+  };
+
+  const pushToTotalIncomeGenaratedLastMonth = () => {
+    // history.push("/pushToEmployeesWithHighSaleFromTo");
+    history.push("/PushToTotalIncomeGenaratedLastMonth");
+  };
+
+  const pushToTotalIncomeGenFromTo = () => {
+    // history.push("/pushToEmployeesWithHighSaleFromTo");
+    history.push({
+      pathname: "/PushToTotalIncomeGenFromTo",
+      state: { startDate, endDate }, // your data array of objects
+    });
+  };
+
+  const pushToTotalIncomeGenaratedByEmployee = () => {
+    // history.push("/pushToEmployeesWithHighSaleFromTo");
+    history.push({
+      pathname: "/PushToTotalIncomeGenaratedByEmployee",
+      state: { empName }, // your data array of objects
+    });
+  };
+
+  const pushToTopFiveSellingProducts = () => {
+    // history.push("/pushToEmployeesWithHighSaleFromTo");
+    history.push("/PushToTopFiveSellingProducts");
+  };
+  const pushToDuePayments = () => {
+    // history.push("/pushToEmployeesWithHighSaleFromTo");
+    history.push("/PushToDuePayments");
+  };
+
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [empName, setEmpName] = useState("");
 
   const handleStartDateChange = (e) => {
     setStartDate(e.target.value);
@@ -66,10 +110,13 @@ function OwnerTransactions(props) {
   const handleEndDateChange = (e) => {
     setEndDate(e.target.value);
   };
+  const handleEmpNameChange = (e) => {
+    setEmpName(e.target.value);
+  };
 
   return (
     <div>
-      <CustNavBar />
+      <OwnerNavBar />
       <Row>
         {" "}
         <Col>
@@ -375,7 +422,271 @@ function OwnerTransactions(props) {
                     }}
                   >
                     <Typography component="h1" variant="h5">
-                      Get top 5 customer with highest purchase
+                      Transactions by an employee
+                    </Typography>
+                    <Box
+                      component="form"
+                      // onSubmit={handleSubmit}
+                      noValidate
+                      sx={{ mt: 1 }}
+                    >
+                      <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="empName"
+                        label="Employee Name"
+                        name="empName"
+                        autoComplete="Emploee Name"
+                        autoFocus
+                        value={empName}
+                        onChange={handleEmpNameChange}
+                      />
+
+                      <Button
+                        type="button"
+                        onClick={pushToTransactionsByEmployee}
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                      >
+                        Get transactions
+                      </Button>
+                    </Box>
+                  </Box>
+                </Container>
+              </ThemeProvider>
+            </CardContent>
+          </Card>
+        </Col>
+      </Row>
+      {/* ================= */}
+      <Row>
+        {" "}
+        <Col>
+          <Card
+            style={{
+              margin: "5%",
+              backgroundColor: "rgb(204, 207, 205)",
+              maxHeight: "400px",
+              minHeight: "400px",
+            }}
+          >
+            <CardContent>
+              <ThemeProvider theme={theme}>
+                <Container component="main" maxWidth="xs">
+                  <CssBaseline />
+                  <Box
+                    sx={{
+                      marginTop: 8,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography component="h1" variant="h5">
+                      Total income generated till now
+                    </Typography>
+                    <Box
+                      component="form"
+                      // onSubmit={handleSubmit}
+                      noValidate
+                      sx={{ mt: 1 }}
+                    >
+                      <Button
+                        type="button"
+                        onClick={pushToTotalIncomeGenarated}
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                      >
+                        Get Total Income
+                      </Button>
+                    </Box>
+                  </Box>
+                </Container>
+              </ThemeProvider>
+            </CardContent>
+          </Card>
+        </Col>
+        <Col>
+          <Card
+            style={{
+              margin: "5%",
+              backgroundColor: "rgb(204, 207, 205)",
+              maxHeight: "400px",
+              minHeight: "400px",
+            }}
+          >
+            <CardContent>
+              <ThemeProvider theme={theme}>
+                <Container component="main" maxWidth="xs">
+                  <CssBaseline />
+                  <Box
+                    sx={{
+                      marginTop: 8,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography component="h1" variant="h5">
+                      Total Income generated by a particular employee
+                    </Typography>
+                    <Box
+                      component="form"
+                      // onSubmit={handleSubmit}
+                      noValidate
+                      sx={{ mt: 1 }}
+                    >
+                      <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="empName"
+                        label="Employee Name"
+                        name="empName"
+                        autoComplete="Emploee Name"
+                        autoFocus
+                        value={empName}
+                        onChange={handleEmpNameChange}
+                      />
+                      <Button
+                        type="button"
+                        onClick={pushToTotalIncomeGenaratedByEmployee}
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                      >
+                        Get Total Income
+                      </Button>
+                    </Box>
+                  </Box>
+                </Container>
+              </ThemeProvider>
+            </CardContent>
+          </Card>
+        </Col>
+        <Col>
+          <Card
+            style={{
+              margin: "5%",
+              backgroundColor: "rgb(204, 207, 205)",
+              maxHeight: "400px",
+              minHeight: "400px",
+            }}
+          >
+            <CardContent>
+              <ThemeProvider theme={theme}>
+                <Container component="main" maxWidth="xs">
+                  <CssBaseline />
+                  <Box
+                    sx={{
+                      marginTop: 8,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography component="h1" variant="h5">
+                      Top 5 selling products last month
+                    </Typography>
+                    <Box
+                      component="form"
+                      // onSubmit={handleSubmit}
+                      noValidate
+                      sx={{ mt: 1 }}
+                    >
+                      <Button
+                        type="button"
+                        onClick={pushToTopFiveSellingProducts}
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                      >
+                        Get Products
+                      </Button>
+                    </Box>
+                  </Box>
+                </Container>
+              </ThemeProvider>
+            </CardContent>
+          </Card>
+        </Col>
+      </Row>
+      {/* ====================last============ */}
+      {/* ================= */}
+      <Row>
+        {" "}
+        <Col>
+          <Card
+            style={{
+              margin: "5%",
+              backgroundColor: "rgb(204, 207, 205)",
+              maxHeight: "400px",
+              minHeight: "400px",
+            }}
+          >
+            <CardContent>
+              <ThemeProvider theme={theme}>
+                <Container component="main" maxWidth="xs">
+                  <CssBaseline />
+                  <Box
+                    sx={{
+                      marginTop: 8,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography component="h1" variant="h5">
+                      Total Income Generated Last Month
+                    </Typography>
+                    <Box
+                      component="form"
+                      // onSubmit={handleSubmit}
+                      noValidate
+                      sx={{ mt: 1 }}
+                    >
+                      <Button
+                        type="button"
+                        onClick={pushToTotalIncomeGenaratedLastMonth}
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                      >
+                        Get Total Income
+                      </Button>
+                    </Box>
+                  </Box>
+                </Container>
+              </ThemeProvider>
+            </CardContent>
+          </Card>
+        </Col>
+        <Col>
+          <Card
+            style={{
+              margin: "5%",
+              backgroundColor: "rgb(204, 207, 205)",
+              maxHeight: "400px",
+              minHeight: "400px",
+            }}
+          >
+            <CardContent>
+              <ThemeProvider theme={theme}>
+                <Container component="main" maxWidth="xs">
+                  <CssBaseline />
+                  <Box
+                    sx={{
+                      marginTop: 8,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography component="h1" variant="h5">
+                      Total Income Generated
                     </Typography>
                     <Box
                       component="form"
@@ -409,12 +720,58 @@ function OwnerTransactions(props) {
                       />
                       <Button
                         type="button"
-                        onClick={pushToCustomersWithHighPurchases}
+                        onClick={pushToTotalIncomeGenFromTo}
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                       >
-                        Get Customers
+                        Get Employees
+                      </Button>
+                    </Box>
+                  </Box>
+                </Container>
+              </ThemeProvider>
+            </CardContent>
+          </Card>
+        </Col>
+        <Col>
+          <Card
+            style={{
+              margin: "5%",
+              backgroundColor: "rgb(204, 207, 205)",
+              maxHeight: "400px",
+              minHeight: "400px",
+            }}
+          >
+            <CardContent>
+              <ThemeProvider theme={theme}>
+                <Container component="main" maxWidth="xs">
+                  <CssBaseline />
+                  <Box
+                    sx={{
+                      marginTop: 8,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography component="h1" variant="h5">
+                      Due Payments
+                    </Typography>
+                    <Box
+                      component="form"
+                      // onSubmit={handleSubmit}
+                      noValidate
+                      sx={{ mt: 1 }}
+                    >
+                      <Button
+                        type="button"
+                        onClick={pushToDuePayments}
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                      >
+                        Get Due Payments
                       </Button>
                     </Box>
                   </Box>

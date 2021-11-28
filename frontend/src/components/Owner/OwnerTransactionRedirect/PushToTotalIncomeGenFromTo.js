@@ -8,18 +8,21 @@ import { useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "@mui/material/Button";
 
-function PushToEmployeesWithHighSaleLasMon(props) {
-  let history = useHistory();
-  const [employees, setEmployees] = useState([]);
+function PushToTotalIncomeGenFromTo(props) {
+  const [total, settotal] = useState([]);
+
   useEffect(() => {
     // api call to fetch all employees
     axios
-      .get(SERVER_URL + `/api/employee/getEmployeesWithHighSaleLasMon`)
+      .get(
+        SERVER_URL +
+          `/api/transaction/fetchTotalIncomeGenFromToTo?from=${props.location.state.startDate}&&to=${props.location.state.endDate} `
+      )
       .then((response) => {
         // console.log("=========== response==========", response.data);
         if (response.status === 200) {
-          setEmployees(response.data[0]); // might need to save in LS
-          console.log(response.data[0]);
+          settotal(response.data); // might need to save in LS
+          //   console.log(response.data[0][0]);
         }
       })
       .catch((error) => {
@@ -36,15 +39,13 @@ function PushToEmployeesWithHighSaleLasMon(props) {
       <Table striped bordered hover responsive="lg">
         <thead>
           <tr>
-            <th>Employee Name</th>
             <th>Total</th>
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
+          {total.map((total) => (
             <tr>
-              <td>{employee.emp_name}</td>
-              <td>{employee.Total}</td>
+              <td>{total.Total}</td>
             </tr>
           ))}
         </tbody>
@@ -53,4 +54,4 @@ function PushToEmployeesWithHighSaleLasMon(props) {
   );
 }
 
-export default PushToEmployeesWithHighSaleLasMon;
+export default PushToTotalIncomeGenFromTo;

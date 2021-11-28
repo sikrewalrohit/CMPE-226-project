@@ -22,9 +22,12 @@ import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined
 import AssignmentIndSharpIcon from "@mui/icons-material/AssignmentIndSharp";
 import PersonIcon from "@mui/icons-material/Person";
 import GroupIcon from "@mui/icons-material/Group";
-
+import { NativeSelect } from "@mui/material";
 import { SignUpApi } from "../../api/authApi.js";
-
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 const theme = createTheme();
 
 export default function SignUp() {
@@ -38,6 +41,8 @@ export default function SignUp() {
   const [contactNumber, setContactNumber] = useState("");
   const [gender, setGender] = useState("");
   const [address, setAddress] = useState("");
+  const [member, setMember] = useState(0);
+  console.log(member);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -66,8 +71,11 @@ export default function SignUp() {
   const handleAddressChange = (e) => {
     setAddress(e.target.value);
   };
+  const handleMemberChange = (e) => {
+    setMember(e.target.value);
+  };
 
-  console.log(navigatioBarValue);
+  // console.log(navigatioBarValue);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -79,6 +87,7 @@ export default function SignUp() {
       address: address,
       password: password,
       persona: navigatioBarValue,
+      member,
     };
     // eslint-disable-next-line no-console
     // console.log("============data========", data);
@@ -229,6 +238,25 @@ export default function SignUp() {
                     value={address}
                     onChange={handleAddressChange}
                   />
+                </Grid>
+              ) : null}
+              {navigatioBarValue === 2 ? (
+                <Grid item xs={12}>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">
+                      Register For Membership ?
+                    </InputLabel>
+                    <Select
+                      labelId="member"
+                      id="member"
+                      value={member}
+                      label="member"
+                      onChange={handleMemberChange}
+                    >
+                      <MenuItem value={1}>Yes</MenuItem>
+                      <MenuItem value={0}>No</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Grid>
               ) : null}
               <Grid item xs={12}>

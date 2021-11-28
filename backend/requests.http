@@ -126,6 +126,11 @@ Get http://localhost:5000/api/product/getAllProducts HTTP/1.1
 content-type: application/json
 
 ###
+// get top 5 selling products
+Get http://localhost:5000/api/product/getTopFiveSellingProducts HTTP/1.1
+content-type: application/json
+
+###
 // get all employees
 Get http://localhost:5000/api/employee/getAllEmployees HTTP/1.1
 content-type: application/json
@@ -176,6 +181,31 @@ content-type: application/json
 ###
 // get all transactions of a customer given customer id
 Get http://localhost:5000/api/transaction/fetchAllTransactions?id=8 HTTP/1.1
+content-type: application/json
+
+###
+// get all transactions with pay due
+Get http://localhost:5000/api/transaction/fetchAllTransactionsWithDue HTTP/1.1
+content-type: application/json
+
+###
+// fetch total income gen
+Get http://localhost:5000/api/transaction/fetchTotalIncomeGen HTTP/1.1
+content-type: application/json
+
+###
+// fetch total income gen form to
+Get http://localhost:5000/api/transaction/fetchTotalIncomeGenFromToTo?from=2021-11-02&&to=2021-11-30 HTTP/1.1
+content-type: application/json
+
+###
+// fetch total income gen last month
+Get http://localhost:5000/api/transaction/fetchTotalIncomeGenLasMonth HTTP/1.1
+content-type: application/json
+
+###
+// fetch total income gen by emp name
+Get http://localhost:5000/api/transaction/fetchTotalIncomeGenByAEmp?name=watson HTTP/1.1
 content-type: application/json
 
 ###

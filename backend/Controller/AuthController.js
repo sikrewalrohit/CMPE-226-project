@@ -39,8 +39,10 @@ export const clientSignup = async (req, res) => {
       newUser.email,
       newUser.address,
       hash,
-      newUser.persona
+      newUser.persona,
+      newUser.member
     );
+
     // console.log("================err2==============", err2);
     // console.log("================result2==============", result2);
     if (err2) {

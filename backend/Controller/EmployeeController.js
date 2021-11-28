@@ -8,6 +8,7 @@ import {
   addTransactionService,
   getAllEmployeesFromToService,
   getEmployeesWithHighSaleLasMonService,
+  sendMessageToEmployeeService,
 } from "../Services/EmployeeService.js";
 
 // fetch employee info
@@ -256,5 +257,31 @@ export const addTransaction = async (req, res) => {
   } catch (error) {
     console.log("================error catch==============", error);
     res.status(400).json({ msg: "Unable to create transaction." });
+  }
+};
+
+// delete employee given employee id
+export const sendMessageToEmployee = async (req, res) => {
+  //   console.log("==========Inside Thingy=================");
+
+  console.log(req.body.message, req.body.empIds);
+
+  try {
+    const [err1, result1] = await sendMessageToEmployeeService(
+      req.body.message,
+      req.body.empIds
+    );
+    // console.log("================err1==============", err1);
+    // console.log("================result1 of update==============", result1);
+
+    if (err1) {
+      res.status(400).json({ msg: "Unable to Send Message to Employee." });
+      return;
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    // console.log("================error  1==============", error);
+    res.status(400).json({ msg: "Unable to Send Message to Employee." });
   }
 };

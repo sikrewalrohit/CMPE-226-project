@@ -11,3 +11,14 @@ export const getAllProductsService = () => {
     });
   });
 };
+
+// promise for getting top 5 selling products
+export const getTopFiveSellingProductsService = () => {
+  return new Promise((resolve) => {
+    var query = `call IMS.top_5('product'); `;
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};

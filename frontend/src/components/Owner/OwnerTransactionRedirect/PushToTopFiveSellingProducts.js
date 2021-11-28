@@ -6,19 +6,24 @@ import { useEffect } from "react";
 import SERVER_URL from "../../../config/config.js";
 import { useState } from "react";
 import Table from "react-bootstrap/Table";
-import Button from "@mui/material/Button";
 
-function PushToEmployeesWithHighSaleLasMon(props) {
+function PushToTopFiveSellingProducts(props) {
+  //   console.log(
+  //     "===================",
+  //     props.location.state.startDate,
+  //     props.location.state.endDate
+  //   );
   let history = useHistory();
-  const [employees, setEmployees] = useState([]);
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
     // api call to fetch all employees
     axios
-      .get(SERVER_URL + `/api/employee/getEmployeesWithHighSaleLasMon`)
+      .get(SERVER_URL + `/api/product/getTopFiveSellingProducts`)
       .then((response) => {
         // console.log("=========== response==========", response.data);
         if (response.status === 200) {
-          setEmployees(response.data[0]); // might need to save in LS
+          setProducts(response.data[0]); // might need to save in LS
           console.log(response.data[0]);
         }
       })
@@ -36,15 +41,15 @@ function PushToEmployeesWithHighSaleLasMon(props) {
       <Table striped bordered hover responsive="lg">
         <thead>
           <tr>
-            <th>Employee Name</th>
-            <th>Total</th>
+            <th>Product Name</th>
+            <th>Product Count</th>
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
+          {products.map((product) => (
             <tr>
-              <td>{employee.emp_name}</td>
-              <td>{employee.Total}</td>
+              <td>{product.product_name}</td>
+              <td>{product.Count}</td>
             </tr>
           ))}
         </tbody>
@@ -53,4 +58,4 @@ function PushToEmployeesWithHighSaleLasMon(props) {
   );
 }
 
-export default PushToEmployeesWithHighSaleLasMon;
+export default PushToTopFiveSellingProducts;

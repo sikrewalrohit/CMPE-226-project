@@ -39,7 +39,7 @@ export const getAllEmployeesFromToService = (from, to) => {
   return new Promise((resolve) => {
     var query = `SELECT e.emp_name, sum(t.total) as Total
     FROM employee e, tran t
-    where e.employee_id=t.employee_id and t.tran_date between '${from}' and '${to}'
+    where t.payment_due = 1 and e.employee_id=t.employee_id and t.tran_date between '${from}' and '${to}'
     group by e.emp_name
     order by sum(Total) DESC
     LIMIT 5;`;
@@ -53,7 +53,7 @@ export const getAllEmployeesFromToService = (from, to) => {
 // promise for updating userProfile profile info
 export const getEmployeesWithHighSaleLasMonService = (from, to) => {
   return new Promise((resolve) => {
-    var query = `call IMS.top_5('customer');`;
+    var query = `call IMS.top_5('employee');`;
 
     sql.query(query, (err, result) => {
       resolve([err, result]);
@@ -86,6 +86,18 @@ export const addTransactionService = (
     var query = `call IMS.calculate_price(${empId},${cusId},'${date}', ${qty},${payDue},${discount}, '${productIdsString}');`;
     console.log("======query======", query);
     // var query = `call IMS.calculate_price(3,2,'2021-11-26', 2,0,10,'2,5');`;
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};
+
+// promise to send message to employee
+export const sendMessageToEmployeeService = (message, empIds) => {
+  return new Promise((resolve) => {
+    var query = `update employee set OwnerMessage= '${message}' where employee_id in (${empIds});`;
+    console.log("======query======", query);
 
     sql.query(query, (err, result) => {
       resolve([err, result]);

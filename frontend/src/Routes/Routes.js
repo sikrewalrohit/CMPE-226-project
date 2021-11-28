@@ -18,6 +18,13 @@ import pushToEmployeesWithHighSaleFromTo from "../components/Owner/OwnerTransact
 import PushToCustomersWithHighPurchaseFromTo from "../components/Owner/OwnerTransactionRedirect/PushToCustomersWithHighPurchaseFromTo.js";
 import pushCusWithHighestPurLastMonth from "../components/Owner/OwnerTransactionRedirect/pushCusWithHighestPurLastMonth.js";
 import PushToEmployeesWithHighSaleLasMon from "../components/Owner/OwnerTransactionRedirect/PushToEmployeesWithHighSaleLasMon.js";
+import PushToTransactionsByEmployee from "../components/Owner/OwnerTransactionRedirect/PushToTransactionsByEmployee.js";
+import PushToTotalIncomeGenarated from "../components/Owner/OwnerTransactionRedirect/PushToTotalIncomeGenarated.js";
+import PushToTotalIncomeGenaratedByEmployee from "../components/Owner/OwnerTransactionRedirect/PushToTotalIncomeGenaratedByEmployee.js";
+import PushToTopFiveSellingProducts from "../components/Owner/OwnerTransactionRedirect/PushToTopFiveSellingProducts.js";
+import PushToTotalIncomeGenaratedLastMonth from "../components/Owner/OwnerTransactionRedirect/PushToTotalIncomeGenaratedLastMonth.js";
+import PushToTotalIncomeGenFromTo from "../components/Owner/OwnerTransactionRedirect/PushToTotalIncomeGenFromTo.js";
+import PushToDuePayments from "../components/Owner/OwnerTransactionRedirect/PushToDuePayments.js";
 
 const Routes = () => {
   return (
@@ -54,6 +61,36 @@ const Routes = () => {
         path="/PushToEmployeesWithHighSaleLasMon"
         component={PushToEmployeesWithHighSaleLasMon}
       />
+      <Route
+        path="/PushToTransactionsByEmployee"
+        component={PushToTransactionsByEmployee}
+      />
+      <Route
+        path="/PushToTotalIncomeGenarated"
+        component={PushToTotalIncomeGenarated}
+      />
+      <Route
+        path="/PushToTotalIncomeGenaratedByEmployee"
+        component={PushToTotalIncomeGenaratedByEmployee}
+      />
+      <Route
+        path="/PushToTotalIncomeGenaratedByEmployee"
+        component={PushToTotalIncomeGenaratedByEmployee}
+      />
+      <Route
+        path="/PushToTopFiveSellingProducts"
+        component={PushToTopFiveSellingProducts}
+      />
+      <Route
+        path="/PushToTotalIncomeGenaratedLastMonth"
+        component={PushToTotalIncomeGenaratedLastMonth}
+      />
+      <Route
+        path="/PushToTotalIncomeGenFromTo"
+        component={PushToTotalIncomeGenFromTo}
+      />
+
+      <Route path="/PushToDuePayments" component={PushToDuePayments} />
     </div>
   );
 };
