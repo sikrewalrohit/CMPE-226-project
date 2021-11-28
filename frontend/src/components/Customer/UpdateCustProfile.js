@@ -17,7 +17,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 
-let id = 1; // local storage
+const userData = JSON.parse(localStorage.getItem("userData"));
+var id = userData.customer_id;
 
 const UpdateCustProfile = () => {
   const [name, setName] = useState("");

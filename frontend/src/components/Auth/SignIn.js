@@ -156,7 +156,7 @@ export default function SignIn() {
                   }
                 />
                 <BottomNavigationAction
-                  label="User"
+                  label="Customer"
                   icon={
                     <GroupIcon fontSize="large" color="primary">
                       {" "}

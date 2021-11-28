@@ -16,8 +16,9 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
+const userData = JSON.parse(localStorage.getItem("userData"));
+var id = userData.employee_id;
 
-let id = 9; // local storage
 const UpdateEmpProfile = () => {
   let history = useHistory();
   const [name, setName] = useState("");
