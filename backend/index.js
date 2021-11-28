@@ -3,12 +3,44 @@ import mysql from "mysql";
 import bodyParser from "body-parser";
 import cors from "cors";
 import "dotenv/config";
+import winston from "winston";
+import expressWinston from "express-winston";
+import bunyan from "express-bunyan-logger";
 
 const app = express();
 
 //Middlewares
 app.use(cors());
 app.use(bodyParser.json());
+// app.use(
+//   expressWinston.logger({
+//     transports: [new winston.transports.Console()],
+//     format: winston.format.combine(
+//       winston.format.colorize(),
+//       winston.format.json()
+//     ),
+//     meta: false,
+//     msg: "HTTP  ",
+//     expressFormat: true,
+//     colorize: false,
+//     ignoreRoute: function (req, res) {
+//       return false;
+//     },
+//   })
+// );
+app.use(
+  bunyan({
+    name: "logger",
+    format: ":remote-address - :user-agent[major] custom logger",
+    streams: [
+      {
+        level: "info",
+        stream: process.stdout,
+      },
+    ],
+  })
+);
+app.use(bunyan.errorLogger());
 
 //Import Routes
 import AuthRoutes from "./Routes/AuthRoutes.js";
