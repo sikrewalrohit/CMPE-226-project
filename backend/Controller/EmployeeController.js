@@ -9,6 +9,7 @@ import {
   getAllEmployeesFromToService,
   getEmployeesWithHighSaleLasMonService,
   sendMessageToEmployeeService,
+  getEmployeeMessageService,
 } from "../Services/EmployeeService.js";
 
 // fetch employee info
@@ -283,5 +284,26 @@ export const sendMessageToEmployee = async (req, res) => {
   } catch (error) {
     // console.log("================error  1==============", error);
     res.status(400).json({ msg: "Unable to Send Message to Employee." });
+  }
+};
+
+//given employee id get message
+export const getEmployeeMessage = async (req, res) => {
+  //   console.log("==========Inside Thingy=================");
+
+  try {
+    const [err1, result1] = await getEmployeeMessageService(req.query.id);
+    // console.log("================err1==============", err1);
+    // console.log("================result1 of update==============", result1);
+
+    if (err1) {
+      res.status(400).json({ msg: "Unable to fetch employee message." });
+      return;
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    // console.log("================error  1==============", error);
+    res.status(400).json({ msg: "Unable to fetch employee message." });
   }
 };

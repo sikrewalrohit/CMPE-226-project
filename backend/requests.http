@@ -79,6 +79,11 @@ content-type: application/json
 Get http://localhost:5000/api/employee/getEmpInfo?id=2 HTTP/1.1
 content-type: application/json
 
+###
+// get employee messge
+Get http://localhost:5000/api/employee/getEmployeeMessage?id=1 HTTP/1.1
+content-type: application/json
+
 
 ###
 // update employee info
@@ -97,6 +102,10 @@ content-type: application/json
 Get http://localhost:5000/api/customer/getCusInfo?id=1 HTTP/1.1
 content-type: application/json
 
+###
+// get all customers 
+Get http://localhost:5000/api/customer/getAllCustomers HTTP/1.1
+content-type: application/json
 
 ###
 // update customer info
@@ -183,6 +192,23 @@ content-type: application/json
 Get http://localhost:5000/api/transaction/fetchAllTransactions?id=8 HTTP/1.1
 content-type: application/json
 
+
+
+###
+// get all transactions of a customer given customer id
+Get http://localhost:5000/api/transaction/cusLastTranDate?id=8 HTTP/1.1
+content-type: application/json
+
+###
+// get all transactions of a customer given customer id
+Get http://localhost:5000/api/transaction/fetchAllTransactionsView?id=8 HTTP/1.1
+content-type: application/json
+
+###
+// get all transactions of a customer given customer id
+DELETE http://localhost:5000/api/transaction/deletTransaction?id=1 HTTP/1.1
+content-type: application/json
+
 ###
 // get all transactions with pay due
 Get http://localhost:5000/api/transaction/fetchAllTransactionsWithDue HTTP/1.1
@@ -221,6 +247,11 @@ content-type: application/json
 ###
 // get customer id given customer email
 Get http://localhost:5000/api/customer/getFiveCusHighPurFromTo?from=2021-11-02&&to=2021-11-30 HTTP/1.1
+content-type: application/json
+
+###
+// get customer membership status given customer id
+Get http://localhost:5000/api/customer/getMembershipStatus?id=9 HTTP/1.1
 content-type: application/json
 
 ###

@@ -25,6 +25,8 @@ import PushToTopFiveSellingProducts from "../components/Owner/OwnerTransactionRe
 import PushToTotalIncomeGenaratedLastMonth from "../components/Owner/OwnerTransactionRedirect/PushToTotalIncomeGenaratedLastMonth.js";
 import PushToTotalIncomeGenFromTo from "../components/Owner/OwnerTransactionRedirect/PushToTotalIncomeGenFromTo.js";
 import PushToDuePayments from "../components/Owner/OwnerTransactionRedirect/PushToDuePayments.js";
+import EmpMessagesFromOwner from "../components/Employee/EmpMessagesFromOwner.js";
+import EmployeeToCustomers from "../components/Employee/EmployeeToCustomers.js";
 
 const Routes = () => {
   return (
@@ -91,6 +93,8 @@ const Routes = () => {
       />
 
       <Route path="/PushToDuePayments" component={PushToDuePayments} />
+      <Route path="/EmpMessagesFromOwner" component={EmpMessagesFromOwner} />
+      <Route path="/EmployeeToCustomers" component={EmployeeToCustomers} />
     </div>
   );
 };

@@ -73,3 +73,27 @@ export const getFiveCusHighPurLasMonService = () => {
     });
   });
 };
+
+// promise for fetching membership status of cust
+export const getMembershipStatusService = (id) => {
+  return new Promise((resolve) => {
+    var query = `select membership from customer where customer_id='${id}';`;
+    // console.log("=====================", query);
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};
+
+// promise for fetching all customers
+export const getAllCustomersService = (id) => {
+  return new Promise((resolve) => {
+    var query = `select * from customer;`;
+    // console.log("=====================", query);
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};

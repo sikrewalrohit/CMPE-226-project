@@ -23,6 +23,17 @@ export const fetchAllTransactionsWithDueService = (id) => {
   });
 };
 
+// promise for fetching all transactions_view of with payment due
+export const fetchAllTransactionsViewService = (id) => {
+  return new Promise((resolve) => {
+    var query = `select * from simple_tran_customer where customer_id=${id};`;
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};
+
 // promise for given transaction id update payment due of transaction
 export const updateTransactionPayDueColService = (id) => {
   return new Promise((resolve) => {
@@ -97,6 +108,30 @@ export const fetchTotalIncomeGenLasMonthService = (name) => {
 export const fetchTotalIncomeGenFromToToService = (from, to) => {
   return new Promise((resolve) => {
     var query = `Select sum(total) as Total From tran where t.payment_due = 1 and tran_date between '${from}' and '${to}';`;
+    // console.log("==========", query);
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};
+
+// promise for deleting a transaction given tran id
+export const deletTransactionService = (id) => {
+  return new Promise((resolve) => {
+    var query = `DELETE FROM tran WHERE transaction_id='${id}';`;
+    // console.log("==========", query);
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};
+
+// promise for fetching cusLastTranDate
+export const cusLastTranDateService = (id) => {
+  return new Promise((resolve) => {
+    var query = `select max(tran_date) as maxDate from tran where customer_id='${id}';`;
     console.log("==========", query);
 
     sql.query(query, (err, result) => {

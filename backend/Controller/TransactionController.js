@@ -10,6 +10,9 @@ import {
   fetchTotalIncomeGenLasMonthService,
   fetchTotalIncomeGenFromToToService,
   fetchAllTransactionsWithDueService,
+  fetchAllTransactionsViewService,
+  deletTransactionService,
+  cusLastTranDateService,
 } from "../Services/TransactionService.js";
 
 // fetch all transactin of a given cust --> cust id
@@ -35,6 +38,35 @@ export const fetchAllTransactions = async (req, res) => {
     res.status(200).json(result1);
   } catch (error) {
     // console.log("================error==============", error);
+    res
+      .status(400)
+      .json({ msg: "Unable to fetch customer Transactions from database." });
+  }
+};
+
+// fetch all transactin_view of a given cust --> cust id
+export const fetchAllTransactionsView = async (req, res) => {
+  const cusId = req.query.id;
+  console.log("==========Inside Thingy=================", cusId);
+  try {
+    const [err1, result1] = await fetchAllTransactionsViewService(cusId);
+    console.log("================err1==============", err1);
+    console.log("================result1==============", result1);
+
+    if (result1.length === 0) {
+      res.status(400).json({ msg: "No transactions available." });
+      return;
+    }
+    if (err1) {
+      res
+        .status(400)
+        .json({ msg: "Unable to fetch customer Transactions from database." });
+      return;
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    console.log("================error==============", error);
     res
       .status(400)
       .json({ msg: "Unable to fetch customer Transactions from database." });
@@ -217,5 +249,57 @@ export const fetchAllTransactionsWithDue = async (req, res) => {
     res
       .status(400)
       .json({ msg: "Unable to fetch Transaction with due payments." });
+  }
+};
+
+// delte a transaction given tran in
+export const deletTransaction = async (req, res) => {
+  // console.log("==========Inside Thingy=================", req.query.id);
+
+  try {
+    const [err1, result1] = await deletTransactionService(req.query.id);
+    // console.log("================err1==============", err1);
+    // console.log("================result1==============", result1);
+    if (err1) {
+      res.status(400).json({ msg: "Unable to delete this Transaction." });
+      return;
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    // console.log("================error==============", error);
+    res.status(400).json({ msg: "Unable to delete this Transaction." });
+  }
+};
+
+// cusLastTranDate given cust id
+export const cusLastTranDate = async (req, res) => {
+  console.log("==========Inside Thingy=================", req.query.id);
+
+  try {
+    const [err1, result1] = await cusLastTranDateService(req.query.id);
+    console.log("================err1==============", err1);
+    console.log("================result1==============", result1);
+    if (err1) {
+      res
+        .status(400)
+        .json({ msg: "Unable to fetch Customer last transaction Date." });
+      return;
+    }
+
+    if (result1.maxDate === null) {
+      res.status(200).json([
+        {
+          maxDate: "111",
+        },
+      ]);
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    console.log("================error==============", error);
+    res
+      .status(400)
+      .json({ msg: "Unable to fetch Customer last transaction Date." });
   }
 };

@@ -17,6 +17,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { useState } from "react";
 import Table from "react-bootstrap/Table";
 import { useCart } from "react-use-cart";
+import { Row, Col } from "react-bootstrap";
 
 const theme = createTheme();
 
@@ -45,12 +46,12 @@ function EmpProducts(props) {
   const [cusId, setCusid] = useState("");
   const [productsAddedToCart, setProductsAddedToCart] = useState([]);
   const [allInfoExport, setAllInfoExport] = useState({});
+  const [custLastTranDate, setCustLastTranDate] = useState("");
+  const [membershipStatus, setMembershipStatus] = useState("");
+
   // const [qty, setQty] = useState(0);
 
-  console.log(
-    "==============xxxxxxxxxxxxx===============",
-    productsAddedToCart
-  );
+  console.log("==============xxxxxxxxxxxxx===============", membershipStatus);
 
   useEffect(() => {
     // api call to fetch all products
@@ -133,16 +134,58 @@ function EmpProducts(props) {
         if (response.status === 200) {
           setCusid(response.data[0].customer_id);
           // var cusId = response.data[0].customer_id; // might need to save in LS
+
+          // // api to get customer last transaction date
+          axios
+            .get(
+              SERVER_URL +
+                `/api/transaction/cusLastTranDate?id=${response.data[0].customer_id}`
+            )
+            .then((response) => {
+              // console.log("=========== response==========", response.data);
+              if (response.status === 200) {
+                setCustLastTranDate(response.data[0].maxDate);
+              }
+            })
+            .catch((error) => {
+              // console.log("=============error=============", error);
+              if (error.response.data.msg) {
+                alert(error.response.data.msg);
+              } else {
+                alert("Unable to fetch Customer's last transaction Date.");
+              }
+            });
+
+          // // api to get customer membership status
+          axios
+            .get(
+              SERVER_URL +
+                `/api/customer/getMembershipStatus?id=${response.data[0].customer_id}`
+            )
+            .then((response) => {
+              // console.log("=========== response==========", response.data);
+              if (response.status === 200) {
+                setMembershipStatus(response.data[0].membership);
+              }
+            })
+            .catch((error) => {
+              // console.log("=============error=============", error);
+              if (error.response.data.msg) {
+                alert(error.response.data.msg);
+              } else {
+                alert("Unable to fetch customer Membership Status.");
+              }
+            });
           setModalState(0);
         }
       })
       .catch((error) => {
-        console.log("=============error=============", error);
-        if (error.response.data.msg) {
-          alert(error.response.data.msg);
-        } else {
-          alert("Unable to fetch customer information from database.");
-        }
+        // console.log("=============error=============", error);
+        // if (error.response.data.msg) {
+        // alert(error.response.data.msg);
+        // } else {
+        alert("Unable to fetch customer information from database.");
+        // }
       });
   };
   return (
@@ -291,6 +334,82 @@ function EmpProducts(props) {
                 </Box>
               </Box>
             </Container>
+            <Row>
+              {" "}
+              <Col>
+                <Card
+                  style={{
+                    margin: "5%",
+                    backgroundColor: "rgb(204, 207, 205)",
+                    maxHeight: "200px",
+                    minHeight: "200px",
+                  }}
+                >
+                  <CardContent>
+                    <ThemeProvider theme={theme}>
+                      <Container component="main" maxWidth="xs">
+                        <CssBaseline />
+                        <Box
+                          sx={{
+                            marginTop: 8,
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Typography component="h1" variant="h5">
+                            Customer Last Transaction Date: {custLastTranDate}
+                          </Typography>
+                          <Box
+                            component="form"
+                            // onSubmit={handleSubmit}
+                            noValidate
+                            sx={{ mt: 1 }}
+                          ></Box>
+                        </Box>
+                      </Container>
+                    </ThemeProvider>
+                  </CardContent>
+                </Card>
+              </Col>
+              <Col>
+                <Card
+                  style={{
+                    margin: "5%",
+                    backgroundColor: "rgb(204, 207, 205)",
+                    maxHeight: "200px",
+                    minHeight: "200px",
+                  }}
+                >
+                  <CardContent>
+                    <ThemeProvider theme={theme}>
+                      <Container component="main" maxWidth="xs">
+                        <CssBaseline />
+                        <Box
+                          sx={{
+                            marginTop: 8,
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Typography component="h1" variant="h5">
+                            Membership Status:{" "}
+                            {membershipStatus === 1 ? "Yes" : "No"}
+                          </Typography>
+                          <Box
+                            component="form"
+                            // onSubmit={handleSubmit}
+                            noValidate
+                            sx={{ mt: 1 }}
+                          ></Box>
+                        </Box>
+                      </Container>
+                    </ThemeProvider>
+                  </CardContent>
+                </Card>
+              </Col>
+            </Row>
           </ThemeProvider>
         ) : null}
       </div>

@@ -97,7 +97,19 @@ export const addTransactionService = (
 export const sendMessageToEmployeeService = (message, empIds) => {
   return new Promise((resolve) => {
     var query = `update employee set OwnerMessage= '${message}' where employee_id in (${empIds});`;
-    console.log("======query======", query);
+    // console.log("======query======", query);
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};
+
+// promise to fetch employee message
+export const getEmployeeMessageService = (id) => {
+  return new Promise((resolve) => {
+    var query = `select OwnerMessage from employee where employee_id = ${id};`;
+    // console.log("======query======", query);
 
     sql.query(query, (err, result) => {
       resolve([err, result]);

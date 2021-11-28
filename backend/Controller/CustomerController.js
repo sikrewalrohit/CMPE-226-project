@@ -7,6 +7,8 @@ import {
   getCustIdGivenEmailService,
   getFiveCusHighPurFromToService,
   getFiveCusHighPurLasMonService,
+  getMembershipStatusService,
+  getAllCustomersService,
 } from "../Services/CustomerService.js";
 
 // fetch customer info
@@ -112,12 +114,12 @@ export const deleteCusInfo = async (req, res) => {
 
 // fetch cust id given cust email
 export const getCustIdGivenEmail = async (req, res) => {
-  // console.log("==========Inside Thingy=================");
+  console.log("==========Inside Thingy=================");
   const cus_email = req.query.email;
   try {
     const [err1, result1] = await getCustIdGivenEmailService(cus_email);
-    // console.log("================err1==============", err1);
-    // console.log("================result1==============", result1);
+    console.log("================err1==============", err1);
+    console.log("================result1==============", result1);
 
     if (result1.length === 0) {
       res.status(400).json({ msg: "Invalid Email For Customer." });
@@ -197,5 +199,51 @@ export const getFiveCusHighPurLasMon = async (req, res) => {
     res
       .status(400)
       .json({ msg: "Unable to fetch customer information from database." });
+  }
+};
+
+// fetch to cus with hisghest pur last mon
+export const getMembershipStatus = async (req, res) => {
+  // console.log("==========Inside Thingy=================");
+
+  try {
+    const [err1, result1] = await getMembershipStatusService(req.query.id);
+    // console.log("================err1==============", err1);
+    // console.log("================result1==============", result1);
+
+    if (err1) {
+      res
+        .status(400)
+        .json({ msg: "Unable to fetch customer Membership Status." });
+      return;
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    // console.log("================error==============", error);
+    res
+      .status(400)
+      .json({ msg: "Unable to fetch customer Membership Status." });
+  }
+};
+
+// fetch all custs
+export const getAllCustomers = async (req, res) => {
+  // console.log("==========Inside Thingy=================");
+
+  try {
+    const [err1, result1] = await getAllCustomersService(req.query.id);
+    // console.log("================err1==============", err1);
+    // console.log("================result1==============", result1);
+
+    if (err1) {
+      res.status(400).json({ msg: "Unable to fetch Customers from database." });
+      return;
+    }
+
+    res.status(200).json(result1);
+  } catch (error) {
+    // console.log("================error==============", error);
+    res.status(400).json({ msg: "Unable to fetch Customers from database." });
   }
 };

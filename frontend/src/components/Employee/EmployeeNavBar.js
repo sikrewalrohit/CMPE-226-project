@@ -17,6 +17,14 @@ export default function EmployeeNavBar() {
     history.push("/EmpProducts");
   };
 
+  const messages = () => {
+    history.push("/EmpMessagesFromOwner");
+  };
+
+  const customers = () => {
+    history.push("/EmployeeToCustomers");
+  };
+
   const transactions = () => {
     history.push("/EmpTransactions");
   };
@@ -49,8 +57,18 @@ export default function EmployeeNavBar() {
             </Button>
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Button onClick={messages} color="secondary" variant="contained">
+              Messages
+            </Button>
+          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Button onClick={products} color="warning" variant="contained">
               Products
+            </Button>
+          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Button onClick={customers} color="secondary" variant="contained">
+              Show Customers
             </Button>
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
