@@ -1,5 +1,4 @@
-import bcrypt from "bcrypt";
-
+import EmployeeSales from "../Models/EmployeeSalesModel.js";
 import {
   getEmpInfoService,
   updateEmpInfoService,
@@ -10,6 +9,7 @@ import {
   getEmployeesWithHighSaleLasMonService,
   sendMessageToEmployeeService,
   getEmployeeMessageService,
+  getAllEmployeeSalesService,
 } from "../Services/EmployeeService.js";
 
 // fetch employee info
@@ -302,6 +302,58 @@ export const getEmployeeMessage = async (req, res) => {
     }
 
     res.status(200).json(result1);
+  } catch (error) {
+    // console.log("================error  1==============", error);
+    res.status(400).json({ msg: "Unable to fetch employee message." });
+  }
+};
+
+// takes a month year string finds all emp sales in Mongo that month
+// if finds display else fetch data frpm mySql fill in Mongo and display (format of month_year feb 2021 --> "022021")
+export const getAllEmployeeSales = async (req, res) => {
+  console.log("==========Inside Thingy=================", req.body);
+  var month = req.body.month;
+  var year = req.body.year;
+
+  var month_year = month + year;
+
+  var start_date = year + "-" + month + "-" + "01";
+  var end_date = year + "-" + month + "-" + "30";
+
+  console.log(
+    "==========Inside Thingy=================",
+    month,
+    year,
+    month_year,
+    start_date,
+    end_date
+  );
+
+  try {
+    // fetch from mongo
+    const employeeSales = await EmployeeSales.find({ month_year: month_year });
+
+    console.log("================employeeSales==============", employeeSales);
+
+    if (employeeSales.length > 0) {
+      res.status(200).json(employeeSales);
+      return;
+    } else {
+      // fetch from my sql and add to mongo
+      const [err1, result1] = await getAllEmployeeSalesService(
+        start_date,
+        end_date
+      );
+
+      if (err1) {
+        res.status(400).json({ msg: "Unable to fetch employee message." });
+        return;
+      }
+      console.log("================err1==============", err1);
+      console.log("================result1==============", result1);
+
+      res.status(200).json(result1);
+    }
   } catch (error) {
     // console.log("================error  1==============", error);
     res.status(400).json({ msg: "Unable to fetch employee message." });

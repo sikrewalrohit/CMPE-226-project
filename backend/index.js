@@ -3,6 +3,7 @@ import mysql from "mysql";
 import bodyParser from "body-parser";
 import cors from "cors";
 import "dotenv/config";
+import mongoose from "mongoose";
 import winston from "winston";
 import expressWinston from "express-winston";
 import bunyan from "express-bunyan-logger";
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 //     },
 //   })
 // );
+// BUNYAN
 // app.use(
 //   bunyan({
 //     name: "logger",
@@ -60,7 +62,7 @@ app.get("/", (req, res) => {
   res.json({ msg: "We are on home" });
 });
 
-// Connect to db
+// Connect to mysql db
 export const connection = mysql.createPool({
   connectionLimit: 10,
   host: process.env.HOST,
@@ -72,7 +74,12 @@ export const connection = mysql.createPool({
 });
 connection.getConnection((error) => {
   if (error) throw error;
-  console.log("Successfully connected to the SQL database.");
+  console.log("Successfully connected to the SQL DB!");
+});
+
+// connect to nosqlDB
+mongoose.connect(process.env.MongoDb_CONNECTION, () => {
+  console.log("connected to NoSql DB!");
 });
 
 //How to start listening to the server

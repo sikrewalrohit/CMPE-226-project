@@ -30,6 +30,7 @@ export const clientSignup = async (req, res) => {
       return;
     }
 
+    //  using bcrypt library to Hash the password during sign up.
     let hash = bcrypt.hashSync(newUser.password, 10);
 
     const [err2, result2] = await addToDbPromise(
@@ -112,6 +113,7 @@ export const SignIn = async (req, res) => {
     // console.log("=========retPassword==========", userPass, retPassword);
     // console.log("=========err1==========", err1);
 
+    //  using bcrypt library to Hash the password during signIn.
     if (bcrypt.compareSync(userPass, retPassword)) {
       res.status(200).json({ result: result1[0] }); // this part
     } else {

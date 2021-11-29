@@ -154,6 +154,16 @@ content-type: application/json
 Get http://localhost:5000/api/employee/getEmployeesWithHighSaleLasMon HTTP/1.1
 content-type: application/json
 
+###
+// gettop 5 emp with highest sale last mon
+Post http://localhost:5000/api/employee/getAllEmployeeSales HTTP/1.1
+content-type: application/json
+
+{
+      "year": "2021",
+      "month": "10"
+}
+
 
 
 ###
