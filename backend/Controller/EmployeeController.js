@@ -378,6 +378,8 @@ export const getAllEmployeeSales = async (req, res) => {
     }
   } catch (error) {
     console.log("================error  1==============", error);
-    res.status(400).json({ msg: "Unable to fetch employee message." });
+    res
+      .status(400)
+      .json({ msg: "Unable to fetch employee sales Data fromdatabase." });
   }
 };

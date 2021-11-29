@@ -30,19 +30,19 @@ app.use(bodyParser.json());
 //   })
 // );
 // BUNYAN
-// app.use(
-//   bunyan({
-//     name: "logger",
-//     format: ":remote-address - :user-agent[major] custom logger",
-//     streams: [
-//       {
-//         level: "info",
-//         stream: process.stdout,
-//       },
-//     ],
-//   })
-// );
-// app.use(bunyan.errorLogger());
+app.use(
+  bunyan({
+    name: "logger",
+    format: ":remote-address - :user-agent[major] custom logger",
+    streams: [
+      {
+        level: "info",
+        stream: process.stdout,
+      },
+    ],
+  })
+);
+app.use(bunyan.errorLogger());
 
 //Import Routes
 import AuthRoutes from "./Routes/AuthRoutes.js";

@@ -91,7 +91,7 @@ export default function CustNavBar() {
               Payment
             </Link> */}
             <Button onClick={payment} color="success" variant="contained">
-              Payment
+              Paid/Pending Orders
             </Button>
           </Typography>
         </Toolbar>

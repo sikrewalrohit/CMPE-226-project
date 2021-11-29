@@ -50,7 +50,7 @@ export default function OwnerNavBar() {
               color="secondary"
               variant="contained"
             >
-              Transactions
+              Monitoring
             </Button>
           </Typography>
         </Toolbar>

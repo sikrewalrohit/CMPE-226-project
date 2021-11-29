@@ -53,7 +53,10 @@ function OwnerTransactions(props) {
   };
   const pushToEmployeesWithHighSaleLasMon = () => {
     // history.push("/pushToEmployeesWithHighSaleFromTo");
-    history.push("/PushToEmployeesWithHighSaleLasMon");
+    history.push({
+      pathname: "/PushToEmployeesWithHighSaleLasMon",
+      state: { month, year }, // your data array of objects
+    });
   };
 
   const pushToTransactionsByEmployee = () => {
@@ -104,6 +107,8 @@ function OwnerTransactions(props) {
   const [empName, setEmpName] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
+
+  // console.log("@@@@@@@@@@@@@@@@@@", month, year);
 
   const handleStartDateChange = (e) => {
     setStartDate(e.target.value);
