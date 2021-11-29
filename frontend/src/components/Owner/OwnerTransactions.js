@@ -102,6 +102,8 @@ function OwnerTransactions(props) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [empName, setEmpName] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
 
   const handleStartDateChange = (e) => {
     setStartDate(e.target.value);
@@ -110,8 +112,17 @@ function OwnerTransactions(props) {
   const handleEndDateChange = (e) => {
     setEndDate(e.target.value);
   };
+
   const handleEmpNameChange = (e) => {
     setEmpName(e.target.value);
+  };
+
+  const handleMonthChange = (e) => {
+    setMonth(e.target.value);
+  };
+
+  const handleYearChange = (e) => {
+    setYear(e.target.value);
   };
 
   return (
@@ -376,7 +387,7 @@ function OwnerTransactions(props) {
                     }}
                   >
                     <Typography component="h1" variant="h5">
-                      Get top 5 Employees with highest sale last month
+                      Get Employee sales for a particular month and year.
                     </Typography>
                     <Box
                       component="form"
@@ -384,6 +395,31 @@ function OwnerTransactions(props) {
                       noValidate
                       sx={{ mt: 1 }}
                     >
+                      <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="month"
+                        label="Month"
+                        name="Month"
+                        autoComplete="Month"
+                        autoFocus
+                        value={month}
+                        onChange={handleMonthChange}
+                      />
+                      <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="year"
+                        label="Year"
+                        name="Year"
+                        autoComplete="Year"
+                        autoFocus
+                        value={year}
+                        onChange={handleYearChange}
+                      />
+
                       <Button
                         type="button"
                         onClick={pushToEmployeesWithHighSaleLasMon}
@@ -391,7 +427,7 @@ function OwnerTransactions(props) {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                       >
-                        Get Employees
+                        Get Employee Sales
                       </Button>
                     </Box>
                   </Box>

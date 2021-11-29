@@ -120,11 +120,11 @@ export const getEmployeeMessageService = (id) => {
 // promise to fetch getAllEmployeeSalesService
 export const getAllEmployeeSalesService = (start_date, end_date) => {
   return new Promise((resolve) => {
-    var query = `SELECT e.emp_name, sum(t.total)
+    var query = `SELECT e.emp_name, sum(t.total) as total
     FROM employee e, tran t
     where e.employee_id=t.employee_id and t.tran_date between '${start_date}' and '${end_date}' and payment_due=1
     group by e.emp_name
-    order by sum(t.total) DESC;`;
+    order by total DESC;`;
     console.log("======query======", query);
 
     sql.query(query, (err, result) => {

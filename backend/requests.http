@@ -155,7 +155,9 @@ Get http://localhost:5000/api/employee/getEmployeesWithHighSaleLasMon HTTP/1.1
 content-type: application/json
 
 ###
-// gettop 5 emp with highest sale last mon
+
+// takes a month year string finds all emp sales in Mongo that month
+// if finds display else fetch data frpm mySql fill in Mongo and display (format of month_year feb 2021 --> "022021")
 Post http://localhost:5000/api/employee/getAllEmployeeSales HTTP/1.1
 content-type: application/json
 

@@ -320,6 +320,9 @@ export const getAllEmployeeSales = async (req, res) => {
   var start_date = year + "-" + month + "-" + "01";
   var end_date = year + "-" + month + "-" + "30";
 
+  var emp_names = [];
+  var total_sales = [];
+
   console.log(
     "==========Inside Thingy=================",
     month,
@@ -331,7 +334,7 @@ export const getAllEmployeeSales = async (req, res) => {
 
   try {
     // fetch from mongo
-    const employeeSales = await EmployeeSales.find({ month_year: month_year });
+    var employeeSales = await EmployeeSales.find({ month_year: month_year });
 
     console.log("================employeeSales==============", employeeSales);
 
@@ -352,10 +355,29 @@ export const getAllEmployeeSales = async (req, res) => {
       console.log("================err1==============", err1);
       console.log("================result1==============", result1);
 
-      res.status(200).json(result1);
+      result1.forEach((obj) => {
+        emp_names.push(obj.emp_name);
+        total_sales.push(obj.total);
+      });
+
+      console.log(
+        "================Arrays==============",
+        emp_names,
+        total_sales
+      );
+
+      employeeSales = new EmployeeSales({
+        month_year,
+        emp_names,
+        total_sales,
+      });
+
+      const savedEmployeeSales = await employeeSales.save();
+
+      res.status(200).json(savedEmployeeSales);
     }
   } catch (error) {
-    // console.log("================error  1==============", error);
+    console.log("================error  1==============", error);
     res.status(400).json({ msg: "Unable to fetch employee message." });
   }
 };
