@@ -47,6 +47,7 @@ function EmpProducts(props) {
   const [allInfoExport, setAllInfoExport] = useState({});
   const [custLastTranDate, setCustLastTranDate] = useState("");
   const [membershipStatus, setMembershipStatus] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState([]);
 
   console.log("==============", products);
 
@@ -92,6 +93,8 @@ function EmpProducts(props) {
       discount,
       products: productsAddedToCart,
     };
+
+    console.log("========data======", data);
 
     setAllInfoExport(data);
     axios
@@ -257,7 +260,7 @@ function EmpProducts(props) {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+              {products.map((product, index) => (
                 <tr>
                   <td>{product.product_id}</td>
                   <td>{product.product_name}</td>
@@ -267,18 +270,19 @@ function EmpProducts(props) {
                     <Button
                       // value={employee.employee_id}
                       type="submit"
-                      onClick={() =>
+                      onClick={(e) => {
+                        setButtonDisabled([...buttonDisabled, index]);
                         addToCart(
                           product.product_id,
                           product.product_name,
                           product.product_price
-                        )
-                      }
+                        );
+                      }}
                       // onClick={() => fireEmployee(employee.employee_id)}
-                      // onClick={() => fireEmployee("ROhit")}
+                      // onClick={() => fireEmployee("Rohit")}
                       color="error"
                       variant="contained"
-                      // disabled="false"
+                      disabled={buttonDisabled.includes(index)}
                     >
                       Add To Cart
                     </Button>
