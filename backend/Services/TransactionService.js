@@ -117,10 +117,16 @@ export const fetchTotalIncomeGenFromToToService = (from, to) => {
 };
 
 // promise for deleting a transaction given tran id
-export const deletTransactionService = (id) => {
+export const deletTransactionService = (
+  empId,
+  cusId,
+  transactionId,
+  curDate,
+  productId
+) => {
   return new Promise((resolve) => {
-    var query = `DELETE FROM tran WHERE transaction_id='${id}';`;
-    // console.log("==========", query);
+    var query = `call IMS.update_transaction('${empId}','${cusId}','${transactionId}', '${curDate}','${productId}');`;
+    console.log("==========", query);
 
     sql.query(query, (err, result) => {
       resolve([err, result]);

@@ -26,7 +26,6 @@ function EmpProducts(props) {
 
   const userData = JSON.parse(localStorage.getItem("userData"));
   var empId = userData.employee_id;
-  // console.log("==============", empId);
 
   var today = new Date(),
     date =
@@ -48,6 +47,8 @@ function EmpProducts(props) {
   const [allInfoExport, setAllInfoExport] = useState({});
   const [custLastTranDate, setCustLastTranDate] = useState("");
   const [membershipStatus, setMembershipStatus] = useState("");
+
+  console.log("==============", products);
 
   // const [qty, setQty] = useState(0);
 
@@ -251,6 +252,7 @@ function EmpProducts(props) {
                 <th>Product Id</th>
                 <th>Product Name</th>
                 <th>Product Price</th>
+                <th>Available Quantity</th>
                 <th>Add TO Cart</th>
               </tr>
             </thead>
@@ -260,6 +262,7 @@ function EmpProducts(props) {
                   <td>{product.product_id}</td>
                   <td>{product.product_name}</td>
                   <td>{product.product_price}</td>
+                  <td>{product.product_quantity}</td>
                   <td>
                     <Button
                       // value={employee.employee_id}

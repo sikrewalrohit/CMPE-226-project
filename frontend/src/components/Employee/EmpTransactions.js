@@ -89,10 +89,17 @@ function EmpTransactions(props) {
       });
   };
 
-  const deleteTransaction = (tranId) => {
+  const deleteTransaction = (empId, cusId, transactionId, today, productId) => {
+    const data = {
+      empId,
+      cusId,
+      transactionId,
+      curDate: today,
+      productId,
+    };
     // api to delete a transaction given tran id
     axios
-      .delete(SERVER_URL + `/api/transaction/deletTransaction?id=${tranId}`)
+      .post(SERVER_URL + `/api/transaction/deletTransaction`, data)
       .then((response) => {
         // console.log("=========== response==========", response.data);
         if (response.status === 200) {
@@ -228,7 +235,7 @@ function EmpTransactions(props) {
                 <th>Product Price</th>
                 <th>Transaction Id</th>
                 <th>Employee Id</th>
-                <th>Transaction Date Id</th>
+                <th>Transaction Date</th>
                 <th>Quantity</th>
                 <th>Payment Due</th>
                 <th>Price</th>
@@ -260,7 +267,13 @@ function EmpTransactions(props) {
                       type="submit"
                       // onClick={() => fireEmployee(employee.employee_id)}
                       onClick={() =>
-                        deleteTransaction(transaction.transaction_id)
+                        deleteTransaction(
+                          transaction.employee_id,
+                          transaction.customer_id,
+                          transaction.transaction_id,
+                          transaction.tran_date,
+                          transaction.product_id
+                        )
                       }
                       color="error"
                       variant="contained"

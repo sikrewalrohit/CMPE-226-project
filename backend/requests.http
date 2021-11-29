@@ -205,9 +205,17 @@ Get http://localhost:5000/api/transaction/fetchAllTransactionsView?id=8 HTTP/1.1
 content-type: application/json
 
 ###
-// get all transactions of a customer given customer id
-DELETE http://localhost:5000/api/transaction/deletTransaction?id=1 HTTP/1.1
+// delete a perticular tran
+Post http://localhost:5000/api/transaction/deletTransaction HTTP/1.1
 content-type: application/json
+
+{
+      "empId": 1,
+      "cusId": 4,
+      "transactionId": 9,
+      "curDate": "2021-11-28",
+      "productId": 2
+}
 
 ###
 // get all transactions with pay due

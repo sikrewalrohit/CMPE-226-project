@@ -26,7 +26,7 @@ router.get("/fetchTotalIncomeGen", fetchTotalIncomeGen);
 router.get("/fetchTotalIncomeGenLasMonth", fetchTotalIncomeGenLasMonth);
 router.get("/fetchTotalIncomeGenFromToTo", fetchTotalIncomeGenFromToTo);
 router.get("/fetchTotalIncomeGenByAEmp", fetchTotalIncomeGenByAEmp);
-router.delete("/deletTransaction", deletTransaction); // dlt a transaction given transaction id
+router.post("/deletTransaction", deletTransaction); // dlt a transaction given transaction id
 router.get("/cusLastTranDate", cusLastTranDate); // cust last tran date given cust id
 
 export default router;
