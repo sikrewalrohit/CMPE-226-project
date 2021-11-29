@@ -32,13 +32,21 @@ app.use(bodyParser.json());
 // BUNYAN
 app.use(
   bunyan({
-    name: "logger",
+    name: "Income Monitoring Application",
     format: ":remote-address - :user-agent[major] custom logger",
     streams: [
       {
         level: "info",
         stream: process.stdout,
       },
+      // {
+      //   level: "info",
+      //   path: "C:/Users/Checkout/Desktop/Rohit_226/cmpe-226-team-project/logs.txt", // log ERROR and above to a file
+      // },
+      // {
+      //   level: "info",
+      //   path: "C:/Users/Checkout/Desktop/Rohit_226/cmpe-226-team-project/logs.json", // log ERROR and above to a file
+      // },
     ],
   })
 );
@@ -74,12 +82,12 @@ export const connection = mysql.createPool({
 });
 connection.getConnection((error) => {
   if (error) throw error;
-  console.log("Successfully connected to the SQL DB!");
+  console.log("Successfully connected to the MySql DB!");
 });
 
 // connect to nosqlDB
 mongoose.connect(process.env.MongoDb_CONNECTION, () => {
-  console.log("connected to NoSql DB!");
+  console.log("Successfully connected to MongoDb DB!");
 });
 
 //How to start listening to the server

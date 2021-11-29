@@ -3,10 +3,10 @@ POST http://localhost:5000/api/auth/SignUp HTTP/1.1
 content-type: application/json
 
 {
-      "name": "Rohit Sikrewal",
+      "name": "Yash Vardhan",
       "contact_no": "",
       "gender": "",
-      "email": "sikrw@gmail.com",
+      "email": "Yash@gmail.com",
       "address": "",
       "password": "s",
       "persona": 0
@@ -48,8 +48,8 @@ POST http://localhost:5000/api/auth/SignIn HTTP/1.1
 content-type: application/json
 
 {
-      "email": "sikr13@gmail.com",
-      "password": "ou",
+      "email": "Yash@gmail.com",
+      "password": "s",
       "persona": 0
 }
 ###
