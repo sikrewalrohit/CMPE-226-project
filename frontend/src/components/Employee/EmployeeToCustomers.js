@@ -38,11 +38,18 @@ function EmployeeToCustomers(props) {
           <tr>
             <th>Customer Id</th>
             <th>Customer Name</th>
-            <th>Contact Number</th>
-            <th>Gender</th>
             <th>Email</th>
-            <th>Address</th>
-            <th>Membership Status</th>
+            <th>Product Name</th>
+            <th>Product Id</th>
+            <th>Product Price</th>
+            <th>Transaction Id</th>
+            <th>Employee Id</th>
+            <th>Transaction Date</th>
+            <th>Quantity</th>
+            <th>Payment Due</th>
+            <th>Price</th>
+            <th>Discount</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>
@@ -50,11 +57,18 @@ function EmployeeToCustomers(props) {
             <tr>
               <td>{customer.customer_id}</td>
               <td>{customer.cus_name}</td>
-              <td>{customer.contact_no}</td>
-              <td>{customer.gender}</td>
               <td>{customer.email}</td>
-              <td>{customer.address}</td>
-              <td>{customer.membership}</td>
+              <td>{customer.product_name}</td>
+              <td>{customer.product_id}</td>
+              <td>{customer.product_price}</td>
+              <td>{customer.transaction_id}</td>
+              <td>{customer.employee_id}</td>
+              <td>{customer.tran_date}</td>
+              <td>{customer.quantity}</td>
+              <td>{customer.payment_due}</td>
+              <td>{customer.price}</td>
+              <td>{customer.discount}</td>
+              <td>{customer.total}</td>
             </tr>
           ))}
         </tbody>

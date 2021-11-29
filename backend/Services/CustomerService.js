@@ -89,7 +89,7 @@ export const getMembershipStatusService = (id) => {
 // promise for fetching all customers
 export const getAllCustomersService = (id) => {
   return new Promise((resolve) => {
-    var query = `select * from customer;`;
+    var query = `SELECT * FROM IMS.simple_tran_customer;`;
     // console.log("=====================", query);
 
     sql.query(query, (err, result) => {
