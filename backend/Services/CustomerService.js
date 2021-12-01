@@ -26,7 +26,8 @@ export const updateCusInfoService = (id, name, contactNumber, adress) => {
 // promise for deleting userProfile info
 export const deleteCusInfoService = (id) => {
   return new Promise((resolve) => {
-    var query = `call IMS.delete_customer( ${id} );`;
+    var query = `call IMS.delete_customer(${id});`;
+    console.log("==============query=============", query);
 
     sql.query(query, (err, result) => {
       resolve([err, result]);

@@ -13,7 +13,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 
 export default function CustNavBar() {
-  var id = 6; //fetch from local
+  // var id = 6; //fetch from local
+
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  var cusId = userData.customer_id;
+
   const history = useHistory();
 
   const updateProfile = () => {
@@ -40,15 +44,17 @@ export default function CustNavBar() {
   const deleteAccount = () => {
     // api to delete account i.e deleting creds from db table
     axios
-      .delete(SERVER_URL + `/api/customer/deleteCusInfo?id=${id}`)
+      .post(SERVER_URL + `/api/customer/deleteCusInfo?id=${cusId}`)
       .then((response) => {
         if (response.status === 200) {
+          // console.log("===============here in 200==========", response.status);
           alert("Your account has been deleted successfully!!");
           history.push("/SignUp"); //on successful deletion
         }
       })
       .catch((error) => {
         // if (error.response.data.msg) {
+        // console.log("===============here in 400==========", error);
         alert(error.response.data.sqlMessage);
         // } else {
         // alert("Unable to delete customer information from database.");

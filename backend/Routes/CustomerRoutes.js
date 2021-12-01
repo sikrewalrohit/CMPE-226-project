@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.get("/getCusInfo", getCusInfo);
 router.put("/updateCusInfo", updateCusInfo);
-router.delete("/deleteCusInfo", deleteCusInfo);
+router.post("/deleteCusInfo", deleteCusInfo);
 router.get("/getCustIdGivenEmail", getCustIdGivenEmail); // get cust id given cust email
 router.get("/getFiveCusHighPurFromTo", getFiveCusHighPurFromTo);
 router.get("/getFiveCusHighPurLasMon", getFiveCusHighPurLasMon);
