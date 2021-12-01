@@ -48,11 +48,11 @@ export default function CustNavBar() {
         }
       })
       .catch((error) => {
-        if (error.response.data.msg) {
-          alert(error.response.data.msg);
-        } else {
-          alert("Unable to delete customer information from database.");
-        }
+        // if (error.response.data.msg) {
+        alert(error.response.data.sqlMessage);
+        // } else {
+        // alert("Unable to delete customer information from database.");
+        // }
       });
   };
 

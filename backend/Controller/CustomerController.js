@@ -91,18 +91,14 @@ export const deleteCusInfo = async (req, res) => {
     // console.log("================result1 of update==============", result1);
 
     if (err1) {
-      res
-        .status(400)
-        .json({ msg: "Unable to delete customer information from database." });
+      res.status(400).json(err1);
       return;
     }
 
     res.status(200).json(result1);
   } catch (error) {
     // console.log("================error  1==============", error);
-    res
-      .status(400)
-      .json({ msg: "Unable to delete customer information from database." });
+    res.status(400).json(error);
   }
 };
 
