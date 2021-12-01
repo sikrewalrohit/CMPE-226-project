@@ -39,7 +39,7 @@ export const getAllEmployeesFromToService = (from, to) => {
   return new Promise((resolve) => {
     var query = `SELECT e.emp_name, sum(t.total) as Total
     FROM employee e, tran t
-    where t.payment_due = 1 and e.employee_id=t.employee_id and t.tran_date between '${from}' and '${to}'
+    where t.payment_due = 1 and e.employee_id=t.employee_id and t.tran_date >= '${from}' and t.tran_date<='${to}'
     group by e.emp_name
     order by sum(Total) DESC
     LIMIT 5;`;

@@ -59,9 +59,7 @@ export const updateEmpInfo = async (req, res) => {
     // console.log("================result1 of update==============", result1);
 
     if (err1) {
-      res
-        .status(400)
-        .json({ msg: "Unable to update employee information in database." });
+      res.status(400).json(err1);
       return;
     }
 
@@ -72,18 +70,14 @@ export const updateEmpInfo = async (req, res) => {
     // console.log("================result1==============", result1);
 
     if (err2) {
-      res.status(400).json({
-        msg: "Unable to fetch updated employee information from database.",
-      });
+      res.status(400).json(err2);
       return;
     }
 
     res.status(200).json(result2);
   } catch (error) {
     // console.log("================error  1==============", error);
-    res
-      .status(400)
-      .json({ msg: "Unable to update employee information in database." });
+    res.status(400).json(error);
   }
 };
 
@@ -140,7 +134,7 @@ export const getAllEmployeesFromTo = async (req, res) => {
     console.log("================result1 of update==============", result1);
 
     if (err1) {
-      res.status(400).json({ msg: "Unable to fetch employees from database." });
+      res.status(400).json(err1);
       return;
     }
 
@@ -152,7 +146,7 @@ export const getAllEmployeesFromTo = async (req, res) => {
     res.status(200).json(result1);
   } catch (error) {
     console.log("================error  1==============", error);
-    res.status(400).json({ msg: "Unable to fetch employees from database." });
+    res.status(400).json(error);
   }
 };
 
@@ -250,7 +244,7 @@ export const addTransaction = async (req, res) => {
     console.log("================result1 of update==============", result1);
 
     if (err1) {
-      res.status(400).json({ msg: "Unable to create transaction." });
+      res.status(400).json(err1);
       return;
     }
 
@@ -348,12 +342,13 @@ export const getAllEmployeeSales = async (req, res) => {
         end_date
       );
 
+      console.log("================err1==============", err1);
+      console.log("================result1==============", result1);
+
       if (err1) {
         res.status(400).json({ msg: "Unable to fetch employee message." });
         return;
       }
-      console.log("================err1==============", err1);
-      console.log("================result1==============", result1);
 
       result1.forEach((obj) => {
         emp_names.push(obj.emp_name);
@@ -366,20 +361,31 @@ export const getAllEmployeeSales = async (req, res) => {
         total_sales
       );
 
-      employeeSales = new EmployeeSales({
-        month_year,
-        emp_names,
-        total_sales,
-      });
+      try {
+        var newEmployeeSales = new EmployeeSales({
+          month_year,
+          emp_names,
+          total_sales,
+        });
 
-      const savedEmployeeSales = await employeeSales.save();
+        const savedNewEmployeeSales = await newEmployeeSales.save();
 
-      res.status(200).json(savedEmployeeSales);
+        res.status(200).json(savedNewEmployeeSales);
+        console.log(
+          "=============returned form mongo==============",
+          savedNewEmployeeSales
+        );
+      } catch (error) {
+        console.log("========error while saving=========", error);
+        res
+          .status(400)
+          .json({ msg: "Unable to fetch employee sales Data from database." });
+      }
     }
   } catch (error) {
     console.log("================error  1==============", error);
     res
       .status(400)
-      .json({ msg: "Unable to fetch employee sales Data fromdatabase." });
+      .json({ msg: "Unable to fetch employee sales Data from database." });
   }
 };

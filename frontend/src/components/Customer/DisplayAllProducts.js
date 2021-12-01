@@ -21,7 +21,7 @@ import { Row, Col } from "react-bootstrap";
 
 const theme = createTheme();
 
-function EmpProducts(props) {
+function DisplayAllProducts(props) {
   let history = useHistory();
 
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -192,7 +192,7 @@ function EmpProducts(props) {
   return (
     <div>
       <div>
-        {modalState !== 0 ? (
+        {/* {modalState !== 0 ? (
           <Card style={{ margin: "5%", backgroundColor: "rgb(204, 207, 205)" }}>
             <CardContent>
               <ThemeProvider theme={theme}>
@@ -246,53 +246,51 @@ function EmpProducts(props) {
               </ThemeProvider>
             </CardContent>
           </Card>
-        ) : null}
+        ) : null}{" "} */}
 
-        {modalState !== 1 ? (
-          <Table striped bordered hover responsive="lg">
-            <thead>
+        <Table striped bordered hover responsive="lg">
+          <thead>
+            <tr>
+              <th>Product Id</th>
+              <th>Product Name</th>
+              <th>Product Price</th>
+              <th>Available Quantity</th>
+              {/* <th>Add TO Cart</th> */}
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product, index) => (
               <tr>
-                <th>Product Id</th>
-                <th>Product Name</th>
-                <th>Product Price</th>
-                <th>Available Quantity</th>
-                <th>Add TO Cart</th>
+                <td>{product.product_id}</td>
+                <td>{product.product_name}</td>
+                <td>{product.product_price}</td>
+                <td>{product.product_quantity}</td>
+                {/* <td>
+                  <Button
+                    // value={employee.employee_id}
+                    type="submit"
+                    onClick={(e) => {
+                      setButtonDisabled([...buttonDisabled, index]);
+                      addToCart(
+                        product.product_id,
+                        product.product_name,
+                        product.product_price
+                      );
+                    }}
+                    // onClick={() => fireEmployee(employee.employee_id)}
+                    // onClick={() => fireEmployee("Rohit")}
+                    color="error"
+                    variant="contained"
+                    disabled={buttonDisabled.includes(index)}
+                  >
+                    Add To Cart
+                  </Button>
+                </td> */}
               </tr>
-            </thead>
-            <tbody>
-              {products.map((product, index) => (
-                <tr>
-                  <td>{product.product_id}</td>
-                  <td>{product.product_name}</td>
-                  <td>{product.product_price}</td>
-                  <td>{product.product_quantity}</td>
-                  <td>
-                    <Button
-                      // value={employee.employee_id}
-                      type="submit"
-                      onClick={(e) => {
-                        setButtonDisabled([...buttonDisabled, index]);
-                        addToCart(
-                          product.product_id,
-                          product.product_name,
-                          product.product_price
-                        );
-                      }}
-                      // onClick={() => fireEmployee(employee.employee_id)}
-                      // onClick={() => fireEmployee("Rohit")}
-                      color="error"
-                      variant="contained"
-                      disabled={buttonDisabled.includes(index)}
-                    >
-                      Add To Cart
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        ) : null}
-        {modalState !== 1 ? (
+            ))}
+          </tbody>
+        </Table>
+        {/* {modalState !== 1 ? (
           <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
               <CssBaseline />
@@ -415,10 +413,10 @@ function EmpProducts(props) {
               </Col>
             </Row>
           </ThemeProvider>
-        ) : null}
+        ) : null} */}
       </div>
     </div>
   );
 }
 
-export default EmpProducts;
+export default DisplayAllProducts;

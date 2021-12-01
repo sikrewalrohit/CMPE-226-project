@@ -19,6 +19,7 @@ const theme = createTheme();
 
 const userData = JSON.parse(localStorage.getItem("userData"));
 var id = userData.customer_id;
+// var id = 1;
 
 const UpdateCustProfile = () => {
   const [name, setName] = useState("");
@@ -59,11 +60,11 @@ const UpdateCustProfile = () => {
       })
       .catch((error) => {
         // console.log("=============error=============", error);
-        if (error.response.data.msg) {
-          alert(error.response.data.msg);
-        } else {
-          alert("Unable to update employee information in database.");
-        }
+        // if (error.response.data.msg) {
+        alert(error.response.data.sqlMessage);
+        // } else {
+        // alert("Unable to update employee information in database.");
+        // }
       });
   }, []);
 
@@ -99,11 +100,11 @@ const UpdateCustProfile = () => {
       })
       .catch((error) => {
         // console.log("=============error=============", error);
-        if (error.response.data.msg) {
-          alert(error.response.data.msg);
-        } else {
-          alert("Unable to fetch Customer information from database.");
-        }
+        // if (error.response.data.msg) {
+        alert(error.response.data.sqlMessage);
+        // } else {
+        // alert("Unable to fetch Customer information from database.");
+        // }
       });
   };
 

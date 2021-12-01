@@ -32,11 +32,11 @@ function PushToEmployeesWithHighSaleFromTo(props) {
       })
       .catch((error) => {
         // console.log("=============error=============", error);
-        if (error.response.data.msg) {
-          alert(error.response.data.msg);
-        } else {
-          alert("Unable to fetch employees from database.");
-        }
+        // if (error.response.data.msg) {
+        alert(error.response.data.sqlMessage);
+        // } else {
+        // alert("Unable to fetch employees from database.");
+        // }
       });
   }, []);
   return (

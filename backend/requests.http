@@ -18,12 +18,12 @@ POST http://localhost:5000/api/auth/SignUp HTTP/1.1
 content-type: application/json
 
 {
-      "name": "Rohit Sikrewal",
-      "contact_no": "4085496361",
-      "gender": "Male",
-      "email": "sikrewal1@gmail.com",
+      "name": "Bhavya Reddy Kotla",
+      "contact_no": "40854963",
+      "gender": "Female",
+      "email": "bhavya@gmail.com",
       "address": "190 Ryland Street",
-      "password": "sikrewal1@gmail.com",
+      "password": "bhavya@gmail.com",
       "persona": 1
 }
 

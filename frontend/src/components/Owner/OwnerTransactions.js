@@ -550,7 +550,7 @@ function OwnerTransactions(props) {
             </CardContent>
           </Card>
         </Col>
-        <Col>
+        {/* <Col>
           <Card
             style={{
               margin: "5%",
@@ -607,7 +607,7 @@ function OwnerTransactions(props) {
               </ThemeProvider>
             </CardContent>
           </Card>
-        </Col>
+        </Col> */}
         <Col>
           <Card
             style={{

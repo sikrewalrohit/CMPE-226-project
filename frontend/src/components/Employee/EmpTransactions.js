@@ -45,6 +45,7 @@ function EmpTransactions(props) {
   const [cusId, setCusid] = useState("");
   const [productsAddedToCart, setProductsAddedToCart] = useState([]);
   const [allInfoExport, setAllInfoExport] = useState({});
+  const [buttonDisabled, setButtonDisabled] = useState([]);
   // const [qty, setQty] = useState(0);
 
   console.log("==============xxxxxxxxxxxxx===============", cusId);
@@ -103,7 +104,7 @@ function EmpTransactions(props) {
       .then((response) => {
         // console.log("=========== response==========", response.data);
         if (response.status === 200) {
-          window.location.reload(false);
+          // window.location.reload(false);
         }
       })
       .catch((error) => {
@@ -245,7 +246,7 @@ function EmpTransactions(props) {
               </tr>
             </thead>
             <tbody>
-              {transactions.map((transaction) => (
+              {transactions.map((transaction, index) => (
                 <tr>
                   <td>{transaction.customer_id}</td>
                   <td>{transaction.cus_name}</td>
@@ -266,17 +267,19 @@ function EmpTransactions(props) {
                       // value={employee.employee_id}
                       type="submit"
                       // onClick={() => fireEmployee(employee.employee_id)}
-                      onClick={() =>
+                      onClick={(e) => {
+                        setButtonDisabled([...buttonDisabled, index]);
                         deleteTransaction(
                           transaction.employee_id,
                           transaction.customer_id,
                           transaction.transaction_id,
                           transaction.tran_date,
                           transaction.product_id
-                        )
-                      }
+                        );
+                      }}
                       color="error"
                       variant="contained"
+                      disabled={buttonDisabled.includes(index)}
                       // disabled="false"
                     >
                       Delete

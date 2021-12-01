@@ -50,7 +50,7 @@ export const getFiveCusHighPurFromToService = (from, to) => {
   return new Promise((resolve) => {
     var query = `SELECT c.cus_name, sum(t.total) as Total
     from customer as c, tran as t
-    where t.payment_due = 1 and c.customer_id=t.customer_id and t.tran_date between '${from}' and '${to}'
+    where t.payment_due = 1 and c.customer_id=t.customer_id and tran_date >= '${from}' and tran_date <='${to}'
     group by c.cus_name
     order by sum(t.total) DESC
     LIMIT 5;`;

@@ -9,8 +9,10 @@ import Table from "react-bootstrap/Table";
 import Button from "@mui/material/Button";
 
 function PushToTotalIncomeGenaratedByEmployee(props) {
-  const [total, settotal] = useState([]);
+  // const [total, settotal] = useState([]);
   //   console.log(props.location.state.empName);
+
+  var totals = [];
 
   useEffect(() => {
     // api call to fetch all employees
@@ -22,7 +24,9 @@ function PushToTotalIncomeGenaratedByEmployee(props) {
       .then((response) => {
         // console.log("=========== response==========", response.data);
         if (response.status === 200) {
-          settotal(response.data); // might need to save in LS
+          // settotal(response.data); // might need to save in LS
+          totals = response.data;
+
           console.log(response.data);
         }
       })
@@ -45,7 +49,7 @@ function PushToTotalIncomeGenaratedByEmployee(props) {
           </tr>
         </thead>
         <tbody>
-          {total.map((total) => (
+          {totals.map((total) => (
             <tr>
               <td>{total.emp_name}</td>
               <td>{total.total}</td>

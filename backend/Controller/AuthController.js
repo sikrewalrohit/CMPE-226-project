@@ -21,7 +21,7 @@ export const clientSignup = async (req, res) => {
     // console.log("================result1==============", result1);
 
     if (err1) {
-      res.status(400).json({ msg: "Unable to fetch data from database." });
+      res.status(400).json(err1);
       return;
     }
 
@@ -47,7 +47,7 @@ export const clientSignup = async (req, res) => {
     // console.log("================err2==============", err2);
     // console.log("================result2==============", result2);
     if (err2) {
-      res.status(400).json({ msg: "Unable to add credentials to database." });
+      res.status(400).json(err2);
       return;
     }
 
@@ -59,16 +59,14 @@ export const clientSignup = async (req, res) => {
     // console.log("================err3==============", err3);
 
     if (err3) {
-      res
-        .status(400)
-        .json({ msg: "Unable to fetch updated data from database." });
+      res.status(400).json(err3);
       return;
     }
 
     res.status(200).json(result3);
   } catch (error) {
     // console.log("================error==============", error);
-    res.status(400).json({ msg: "Unable to resiter new user." });
+    res.status(400).json(error);
   }
 };
 

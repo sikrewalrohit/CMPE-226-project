@@ -107,7 +107,7 @@ export const fetchTotalIncomeGenLasMonthService = (name) => {
 // promise to fetch total gen income from to to
 export const fetchTotalIncomeGenFromToToService = (from, to) => {
   return new Promise((resolve) => {
-    var query = `Select sum(total) as Total From tran where t.payment_due = 1 and tran_date between '${from}' and '${to}';`;
+    var query = `Select sum(total) as Total From tran t where t.payment_due = 1 and tran_date >= '${from}' and tran_date <='${to}';`;
     // console.log("==========", query);
 
     sql.query(query, (err, result) => {

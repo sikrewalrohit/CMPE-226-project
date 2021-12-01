@@ -58,9 +58,7 @@ export const updateCusInfo = async (req, res) => {
     // console.log("================result1 of update==============", result1);
 
     if (err1) {
-      res
-        .status(400)
-        .json({ msg: "Unable to update customer information in database." });
+      res.status(400).json(err1);
       return;
     }
 
@@ -71,18 +69,14 @@ export const updateCusInfo = async (req, res) => {
     // console.log("================result1==============", result1);
 
     if (err2) {
-      res.status(400).json({
-        msg: "Unable to fetch updated customer information from database.",
-      });
+      res.status(400).json(err2);
       return;
     }
 
     res.status(200).json(result2);
   } catch (error) {
     // console.log("================error  1==============", error);
-    res
-      .status(400)
-      .json({ msg: "Unable to update customer information in database." });
+    res.status(400).json(error);
   }
 };
 
@@ -153,23 +147,19 @@ export const getFiveCusHighPurFromTo = async (req, res) => {
     // console.log("================err1==============", err1);
     // console.log("================result1==============", result1);
 
-    if (result1.length === 0) {
-      res.status(400).json({ msg: "No Customers to Fetch." });
-      return;
-    }
+    // if (result1.length === 0) {
+    //   res.status(400).json({ msg: "No Customers to Fetch." });
+    //   return;
+    // }
     if (err1) {
-      res
-        .status(400)
-        .json({ msg: "Unable to fetch customer information from database." });
+      res.status(400).json(err1);
       return;
     }
 
     res.status(200).json(result1);
   } catch (error) {
     // console.log("================error==============", error);
-    res
-      .status(400)
-      .json({ msg: "Unable to fetch customer information from database." });
+    res.status(400).json(error);
   }
 };
 
@@ -180,25 +170,21 @@ export const getFiveCusHighPurLasMon = async (req, res) => {
   try {
     const [err1, result1] = await getFiveCusHighPurLasMonService();
     // console.log("================err1==============", err1);
-    console.log("================result1==============", result1);
+    // console.log("================result1==============", result1);
 
     if (result1.length === 0) {
       res.status(400).json({ msg: "No Customers to Fetch." });
       return;
     }
     if (err1) {
-      res
-        .status(400)
-        .json({ msg: "Unable to fetch customer information from database." });
+      res.status(400).json(err1);
       return;
     }
 
     res.status(200).json(result1);
   } catch (error) {
     // console.log("================error==============", error);
-    res
-      .status(400)
-      .json({ msg: "Unable to fetch customer information from database." });
+    res.status(400).json(error);
   }
 };
 

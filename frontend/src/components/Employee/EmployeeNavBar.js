@@ -29,6 +29,12 @@ export default function EmployeeNavBar() {
     history.push("/EmpTransactions");
   };
 
+  const logOut = () => {
+    // history.push("/UpdateCustProfile"); push to payment page
+    history.push("/");
+    // window.localStorage.clear();
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -83,6 +89,11 @@ export default function EmployeeNavBar() {
             </Link> */}
             <Button onClick={transactions} color="success" variant="contained">
               Update Orders
+            </Button>
+          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Button onClick={logOut} color="error" variant="contained">
+              Log Out
             </Button>
           </Typography>
         </Toolbar>

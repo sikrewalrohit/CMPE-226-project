@@ -205,7 +205,7 @@ export const fetchTotalIncomeGenLasMonth = async (req, res) => {
 
 // fetch total income generated from to to
 export const fetchTotalIncomeGenFromToTo = async (req, res) => {
-  // console.log("==========Inside Thingy=================");
+  // console.log("==========Inside Thingy=================", req.query);
   try {
     const [err1, result1] = await fetchTotalIncomeGenFromToToService(
       req.query.from,
@@ -214,18 +214,14 @@ export const fetchTotalIncomeGenFromToTo = async (req, res) => {
     // console.log("================err1==============", err1);
     // console.log("================result1==============", result1);
     if (err1) {
-      res
-        .status(400)
-        .json({ msg: "Unable to fetch Total Income Generated Last Month." });
+      res.status(400).json(err1);
       return;
     }
 
     res.status(200).json(result1);
   } catch (error) {
     // console.log("================error==============", error);
-    res
-      .status(400)
-      .json({ msg: "Unable to fetch Total Income Generated Last Month." });
+    res.status(400).json(error);
   }
 };
 

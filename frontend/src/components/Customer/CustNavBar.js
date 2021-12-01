@@ -25,6 +25,18 @@ export default function CustNavBar() {
     history.push("/CustPayment");
   };
 
+  const logOut = () => {
+    // history.push("/UpdateCustProfile"); push to payment page
+    history.push("/");
+    // window.localStorage.clear();
+  };
+
+  const products = () => {
+    // history.push("/UpdateCustProfile"); push to payment page
+    history.push("/displayAllProducts");
+    // window.localStorage.clear();
+  };
+
   const deleteAccount = () => {
     // api to delete account i.e deleting creds from db table
     axios
@@ -62,6 +74,20 @@ export default function CustNavBar() {
               style={{ textDecoration: "none", color: "black" }}
               id="tocustprofile"
               className="nav-link"
+              to="/custProfile"
+            >
+              {" "}
+              Payment
+            </Link> */}
+            <Button onClick={products} color="success" variant="contained">
+              Products
+            </Button>
+          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {/* <Link
+              style={{ textDecoration: "none", color: "black" }}
+              id="tocustprofile"
+              className="nav-link"
               to="/UpdateCustProfile"
             >
               {" "}
@@ -92,6 +118,11 @@ export default function CustNavBar() {
             </Link> */}
             <Button onClick={payment} color="success" variant="contained">
               Paid/Pending Orders
+            </Button>
+          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Button onClick={logOut} color="error" variant="contained">
+              Log Out
             </Button>
           </Typography>
         </Toolbar>

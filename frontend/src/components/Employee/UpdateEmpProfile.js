@@ -18,6 +18,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme();
 const userData = JSON.parse(localStorage.getItem("userData"));
 var id = userData.employee_id;
+// var id = 1;
 
 const UpdateEmpProfile = () => {
   let history = useHistory();
@@ -59,11 +60,11 @@ const UpdateEmpProfile = () => {
       })
       .catch((error) => {
         // console.log("=============error=============", error);
-        if (error.response.data.msg) {
-          alert(error.response.data.msg);
-        } else {
-          alert("Unable to update employee information in database.");
-        }
+        // if (error.response.data.msg) {
+        alert(error.response.data.sqlMessage);
+        // } else {
+        // alert("Unable to update employee information in database.");
+        // }
       });
   }, []);
 
@@ -101,11 +102,11 @@ const UpdateEmpProfile = () => {
       })
       .catch((error) => {
         // console.log("=============error=============", error);
-        if (error.response.data.msg) {
-          alert(error.response.data.msg);
-        } else {
-          alert("Unable to fetch employee information from database.");
-        }
+        // if (error.response.data.msg) {
+        alert(error.response.data.sqlMessage);
+        // } else {
+        // alert("Unable to fetch employee information from database.");
+        // }
       });
   };
 

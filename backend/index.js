@@ -30,27 +30,27 @@ app.use(bodyParser.json());
 //   })
 // );
 // BUNYAN
-app.use(
-  bunyan({
-    name: "Income Monitoring Application",
-    format: ":remote-address - :user-agent[major] custom logger",
-    streams: [
-      {
-        level: "info",
-        stream: process.stdout,
-      },
-      // {
-      //   level: "info",
-      //   path: "C:/Users/Checkout/Desktop/Rohit_226/cmpe-226-team-project/logs.txt", // log ERROR and above to a file
-      // },
-      // {
-      //   level: "info",
-      //   path: "C:/Users/Checkout/Desktop/Rohit_226/cmpe-226-team-project/logs.json", // log ERROR and above to a file
-      // },
-    ],
-  })
-);
-app.use(bunyan.errorLogger());
+// app.use(
+//   bunyan({
+//     name: "Income Monitoring Application",
+//     format: ":remote-address - :user-agent[major] custom logger",
+//     streams: [
+//       {
+//         level: "info",
+//         stream: process.stdout,
+//       },
+//       // {
+//       //   level: "info",
+//       //   path: "C:/Users/Checkout/Desktop/Rohit_226/cmpe-226-team-project/logs.txt", // log ERROR and above to a file
+//       // },
+//       // {
+//       //   level: "info",
+//       //   path: "C:/Users/Checkout/Desktop/Rohit_226/cmpe-226-team-project/logs.json", // log ERROR and above to a file
+//       // },
+//     ],
+//   })
+// );
+// app.use(bunyan.errorLogger());
 
 //Import Routes
 import AuthRoutes from "./Routes/AuthRoutes.js";

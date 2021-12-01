@@ -38,7 +38,7 @@ function PushToEmployeesWithHighSaleLasMon(props) {
         // if (error.response.data.msg) {
         // alert(error.response.data.msg);
         // } else {
-        alert("Unable to fetch employee sales Data fromdatabase.");
+        alert("Unable to fetch employee sales Data from database.");
         // }
       });
   }, []);

@@ -27,6 +27,7 @@ import PushToTotalIncomeGenFromTo from "../components/Owner/OwnerTransactionRedi
 import PushToDuePayments from "../components/Owner/OwnerTransactionRedirect/PushToDuePayments.js";
 import EmpMessagesFromOwner from "../components/Employee/EmpMessagesFromOwner.js";
 import EmployeeToCustomers from "../components/Employee/EmployeeToCustomers.js";
+import DisplayAllProducts from "../components/Customer/DisplayAllProducts.js";
 
 const Routes = () => {
   return (
@@ -95,6 +96,7 @@ const Routes = () => {
       <Route path="/PushToDuePayments" component={PushToDuePayments} />
       <Route path="/EmpMessagesFromOwner" component={EmpMessagesFromOwner} />
       <Route path="/EmployeeToCustomers" component={EmployeeToCustomers} />
+      <Route path="/DisplayAllProducts" component={DisplayAllProducts} />
     </div>
   );
 };

@@ -17,6 +17,12 @@ export default function OwnerNavBar() {
     history.push("/OwnerTransactions");
   };
 
+  const logOut = () => {
+    // window.localStorage.clear();
+    // history.push("/UpdateCustProfile"); push to payment page
+    history.push("/");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -51,6 +57,11 @@ export default function OwnerNavBar() {
               variant="contained"
             >
               Monitoring
+            </Button>
+          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Button onClick={logOut} color="error" variant="contained">
+              Log Out
             </Button>
           </Typography>
         </Toolbar>

@@ -81,3 +81,14 @@ export const getPorfilePromiseSignIn = (persona, email) => {
     });
   });
 };
+
+// promise for checking date is small is or not
+export const checkDatePromise = (from, to) => {
+  return new Promise((resolve) => {
+    var query = `select '${from}' < '${to}'; `;
+
+    sql.query(query, (err, result) => {
+      resolve([err, result]);
+    });
+  });
+};

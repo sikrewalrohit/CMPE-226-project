@@ -104,11 +104,11 @@ export default function SignUp() {
       })
       .catch((error) => {
         // console.log(error);
-        if (error.response.data.msg) {
-          alert(error.response.data.msg);
-        } else {
-          console.alert("Error occured while signing up");
-        }
+        // if (error.response.data.msg) {
+        // alert(error.response.data.msg);
+        // } else {
+        alert(error.response.data.sqlMessage);
+        // }
       });
 
     setName("");
