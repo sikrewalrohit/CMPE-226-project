@@ -114,7 +114,7 @@ function EmpProducts(props) {
 
   // console.log(email);
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   const addToCart = (productId, productName, productPrice) => {
     setProductsAddedToCart((productsAddedToCart) => [
@@ -183,7 +183,7 @@ function EmpProducts(props) {
       .catch((error) => {
         // console.log("=============error=============", error);
         // if (error.response.data.msg) {
-        alert(error.response.data.sqlMessage);
+        alert(error.response.data.msg);
         // } else {
         // alert("Unable to fetch customer information from database.");
         // }
