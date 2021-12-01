@@ -18,6 +18,8 @@ export default function CustNavBar() {
   const userData = JSON.parse(localStorage.getItem("userData"));
   var cusId = userData.customer_id;
 
+  console.log("============cusid========", cusId);
+
   const history = useHistory();
 
   const updateProfile = () => {
@@ -42,9 +44,10 @@ export default function CustNavBar() {
   };
 
   const deleteAccount = () => {
+    var id = cusId;
     // api to delete account i.e deleting creds from db table
     axios
-      .post(SERVER_URL + `/api/customer/deleteCusInfo?id=${cusId}`)
+      .post(SERVER_URL + `/api/customer/deleteCusInfo?id=${id}`)
       .then((response) => {
         if (response.status === 200) {
           // console.log("===============here in 200==========", response.status);
@@ -54,7 +57,7 @@ export default function CustNavBar() {
       })
       .catch((error) => {
         // if (error.response.data.msg) {
-        // console.log("===============here in 400==========", error);
+        console.log("===============here in 400==========", error);
         alert(error.response.data.sqlMessage);
         // } else {
         // alert("Unable to delete customer information from database.");

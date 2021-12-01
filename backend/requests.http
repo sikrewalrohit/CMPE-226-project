@@ -121,7 +121,7 @@ content-type: application/json
 
 ###
 // delete customer info
-POST http://localhost:5000/api/customer/deleteCusInfo?id=9 HTTP/1.1
+POST http://localhost:5000/api/customer/deleteCusInfo?id=13 HTTP/1.1
 content-type: application/json
 
 ###
