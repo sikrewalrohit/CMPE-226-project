@@ -74,12 +74,12 @@ export default function SignIn() {
         }
       })
       .catch((error) => {
-        console.log("=============error=============", error);
-        if (error.response.data.msg) {
-          alert(error.response.data.msg);
-        } else {
-          alert("Error occured while signing in");
-        }
+        // console.log("=============error=============", error);
+        // if (error.response.data.msg) {
+        // alert(error.response.data.msg);
+        // } else {
+        alert("Error occured while signing in");
+        // }
       });
   };
 

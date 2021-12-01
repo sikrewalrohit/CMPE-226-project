@@ -28,12 +28,14 @@ function PushToEmployeesWithHighSaleLasMon(props) {
       .then((response) => {
         // console.log("=========== response==========", response.data);
         if (response.status === 200) {
-          setEmployees(response.data[0]); // might need to save in LS
-          setToPrint(response.data[0].emp_names);
+          console.log("==================", response);
+          setEmployees(response.data); // might need to save in LS
+          setToPrint(response.data.emp_names);
           // console.log(response.data[0]);
         }
       })
       .catch((error) => {
+        console.log(error);
         // console.log("=============error=============", error);
         // if (error.response.data.msg) {
         // alert(error.response.data.msg);

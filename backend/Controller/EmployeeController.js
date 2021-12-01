@@ -330,10 +330,13 @@ export const getAllEmployeeSales = async (req, res) => {
     // fetch from mongo
     var employeeSales = await EmployeeSales.find({ month_year: month_year });
 
-    console.log("================employeeSales==============", employeeSales);
+    console.log(
+      "================employeeSales==============",
+      employeeSales[0]
+    );
 
     if (employeeSales.length > 0) {
-      res.status(200).json(employeeSales);
+      res.status(200).json(employeeSales[0]);
       return;
     } else {
       // fetch from my sql and add to mongo
